@@ -1,0 +1,11 @@
+### 
+
+GET http://localhost:8080/checkLayout
+
+
+###
+
+POST  http://localhost:8080/checkLayout
+Content-Type: application/json
+
+{"SessionId":"76ab0a2715b2d49a83489840c46a6449","Url":"https://www.google.com/?gws_rd=ssl","SpecPath":"/Users/sachin/Preeti/Specs/sample.spec","IncludedTags":null}

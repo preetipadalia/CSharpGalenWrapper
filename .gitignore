@@ -1,0 +1,6 @@
+bin/*
+Test/bin/*
+src/bin/*
+Test/obj/*
+src/obj/*
+Test/test.txt
