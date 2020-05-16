@@ -3,24 +3,67 @@ using System.Collections.Generic;
 using OpenQA.Selenium;
 using CSharpGalenWrapper.API;
 using Newtonsoft.Json;
+using CSharpGalenWrapper.Layout;
+using CSharpGalenWrapper.Report;
 
 namespace CSharpGalenWrapper
 {
     public class LayoutHelper
     {
-        static CheckLayoutAPI layoutAPI=new CheckLayoutAPI();
-
-       
-        public Result CheckLayout(IWebDriver driver, string specFilePath, List<string> listIncluded)
+        CheckLayoutAPI layoutAPI;
+        public LayoutHelper()
         {
-            var layoutRep=layoutAPI.CheckLayoutPost(driver,specFilePath,"",listIncluded);
-            Result rep=GetLayoutReportObject(layoutRep);
+            layoutAPI = new CheckLayoutAPI();
+        }
+        public LayoutReport CheckLayout(IWebDriver driver, string specFilePath, List<string> listIncluded)
+        {
+            var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, listIncluded, "", "", "");
+            LayoutReport rep = GetLayoutReportObject(layoutRep);
+            return rep;
+        }
+        public LayoutReport CheckLayout(IWebDriver driver, string specFilePath, SectionFilter filter)
+        {
+            var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, filter, "", "", "");
+            LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
+            return rep;
+        }
+        public LayoutReport CheckLayout(IWebDriver driver, string specFilePath, SectionFilter filter, Dictionary<string, string> properties)
+        {
+            var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, filter, properties, "", "", "");
+            LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
             return rep;
         }
 
-        private Result GetLayoutReportObject(string layoutRep)
+
+        public LayoutReport CheckLayoutAndCreateReport(IWebDriver driver, string specFilePath, List<string> listIncluded, string testTitle, string reportTitle, string reportPath)
         {
-            return  JsonConvert.DeserializeObject<Result>(layoutRep); 
+            var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, listIncluded, testTitle, reportTitle, reportPath);
+            LayoutReport rep = GetLayoutReportObject(layoutRep);
+            return rep;
+        }
+        public LayoutReport CheckLayoutAndCreateReport(IWebDriver driver, string specFilePath, SectionFilter filter, string testTitle, string reportTitle, string reportPath)
+        {
+            var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, filter, testTitle, reportTitle, reportPath);
+            LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
+            return rep;
+        }
+        public LayoutReport CheckLayoutAndCreateReport(IWebDriver driver, string specFilePath, SectionFilter filter, Dictionary<string, string> properties, string testTitle, string reportTitle, string reportPath)
+        {
+            var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, filter, properties, testTitle, reportTitle, reportPath);
+            LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
+            return rep;
+        }
+
+
+        private LayoutReport GetLayoutReportObject(string layoutRep)
+        {
+            Result result = JsonConvert.DeserializeObject<Result>(layoutRep);
+            LayoutReport report = result.Report;
+            report.Errors = result.Errors;
+            report.ExceptionMessage = result.ExceptionMessage;
+            report.Warnings = result.Warnings;
+            report.ValidationResults = result.ValidationResults;
+            return report;
         }
     }
 }

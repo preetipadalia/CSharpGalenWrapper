@@ -11,8 +11,13 @@ namespace CSharpGalenWrapper.Layout
         private List<String> includedTags;
         private string reportPath;
         private String testTitle;
-  private String reportTitle;
+        private Dictionary<String, String> properties;
+        private String browserType;
+        private String driverPath;
+        private String reportTitle;
         private SectionFilter sectionFilter;
+        private int browserHeight;
+        private int browserWidth;
 
         public string SessionId { get => sessionId; set => sessionId = value; }
         public string Url { get => url; set => url = value; }
@@ -22,47 +27,30 @@ namespace CSharpGalenWrapper.Layout
         public SectionFilter SectionFilter { get => sectionFilter; set => sectionFilter = value; }
         public string ReportTitle { get => reportTitle; set => reportTitle = value; }
         public string TestTitle { get => testTitle; set => testTitle = value; }
+        public Dictionary<string, string> Properties { get => properties; set => properties = value; }
+        public string BrowserType { get => browserType; set => browserType = value; }
+        public string DriverPath { get => driverPath; set => driverPath = value; }
+        public int BrowserHeight { get => browserHeight; set => browserHeight = value; }
+        public int BrowserWidth { get => browserWidth; set => browserWidth = value; }
+
     }
 
-    public class SectionFilter {
+    public class SectionFilter
+    {
+
+        private List<String> includedTags;
+        private List<String> excludedTags;
+        private String sectionName;
     
-    private List<String> includedTags;
-    private List<String> excludedTags;
-    private String sectionName;
 
-    public SectionFilter(List<String> includedTags, List<String> excludedTags) {
-        this.setIncludedTags(includedTags);
-        this.setExcludedTags(excludedTags);
+        public List<string> IncludedTags { get => includedTags; set => includedTags = value; }
+        public List<string> ExcludedTags { get => excludedTags; set => excludedTags = value; }
+        public string SectionName { get => sectionName; set => sectionName = value; }
+        
+        public SectionFilter()
+        {
+        }
+      
     }
-
-    public SectionFilter() {
-    }
-
-    public List<String> getIncludedTags() {
-        return includedTags;
-    }
-    public void setIncludedTags(List<String> includedTags) {
-        this.includedTags = includedTags;
-    }
-    public List<String> getExcludedTags() {
-        return excludedTags;
-    }
-    public void setExcludedTags(List<String> excludedTags) {
-        this.excludedTags = excludedTags;
-    }
-
-    public SectionFilter withSectionName(String sectionName) {
-        this.sectionName = sectionName;
-        return this;
-    }
-
-    public String getSectionName() {
-        return sectionName;
-    }
-
-    public void setSectionName(String sectionName) {
-        this.sectionName = sectionName;
-    }
-}
 
 }

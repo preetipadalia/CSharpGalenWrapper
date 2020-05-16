@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using CSharpGalenWrapper.Report.Validation;
 using Newtonsoft.Json;
 namespace CSharpGalenWrapper.Report
 {
@@ -6,25 +8,43 @@ namespace CSharpGalenWrapper.Report
     public partial class LayoutReport
     {
         [JsonProperty("title")]
-        public object Title { get; set; }
+        public string Title { get; set; }
 
         [JsonProperty("includedTags")]
-        public object IncludedTags { get; set; }
+        public string[] IncludedTags { get; set; }
 
         [JsonProperty("excludedTags")]
-        public object[] ExcludedTags { get; set; }
+        public string[] ExcludedTags { get; set; }
 
         [JsonProperty("sections")]
         public Section[] Sections { get; set; }
 
         [JsonProperty("objects")]
-        public Dictionary<string,LayoutObjectDetails> Objects { get; set; }
+        public Dictionary<string, LayoutObjectDetails> Objects { get; set; }
 
         [JsonProperty("screenshot")]
         public string Screenshot { get; set; }
+
+        [JsonProperty("errors")]
+        public long Errors { get; set; }
+
+        [JsonProperty("warnings")]
+        public long Warnings { get; set; }
+
+        [JsonProperty("report")]
+        public LayoutReport Report { get; set; }
+
+        [JsonProperty("validationResults")]
+        public ValidationResult[] ValidationResults { get; set; }
+
+        [JsonProperty("galenTestInfo")]
+        public GalenTestInfo GalenTestInfo { get; set; }
+
+        [JsonProperty("exceptionMessage")]
+        public string ExceptionMessage { get; set; }
     }
 
-   
+
 
     public partial class Input
     {
@@ -121,5 +141,5 @@ namespace CSharpGalenWrapper.Report
         [JsonProperty("lineNumber")]
         public long LineNumber { get; set; }
     }
-    
+
 }

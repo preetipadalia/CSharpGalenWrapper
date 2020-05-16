@@ -22,7 +22,8 @@ namespace test_api
             driver.Navigate().GoToUrl("http://google.com");
 
             CSharpGalenWrapper.LayoutHelper helper=new CSharpGalenWrapper.LayoutHelper();
-            Result rep=helper.CheckLayout(driver,"/Users/sachin/Preeti/Specs/sample.spec",null);
+            Result rep=helper.CheckLayout(driver,"/Users/sachin/Preeti/Specs/sample.spec",new List<String>());
+            long errors=rep.Errors;
         }
     }
 }
