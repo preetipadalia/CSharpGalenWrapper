@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using CSharpGalenWrapper.API;
 using CSharpGalenWrapper.Report.Validation;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -14,12 +15,14 @@ namespace Tests
         [OneTimeSetUp]
         public void Setup()
         {
+            Server.StartGalenServer();
             driver = new ChromeDriver("/Users/sachin/Preeti");
             driver.Navigate().GoToUrl("http://google.com");
+            driver.Manage().Window.Size = new System.Drawing.Size(200, 300);
 
             CSharpGalenWrapper.LayoutHelper helper = new CSharpGalenWrapper.LayoutHelper();
             rep = helper.CheckLayout(driver, "specs/GoogleFailure.spec", new List<string>());
-
+            Server.StopGalenServer();
         }
 
         [Test]
@@ -40,24 +43,24 @@ namespace Tests
             Assert.AreEqual(rep.ValidationResults[0].Error.Messages[0], "\"input\" is -106px below \"submit\" but it should be greater than or equal to 0px");
         }
 
-         [Test]
+        [Test]
         public void LayoutTestObjectNamePassTest()
         {
             Assert.AreEqual(rep.ValidationResults[0].ValidationObjects[0].Name, "input");
         }
 
-         [Test]
+        [Test]
         public void LayoutTestObjectAreaPassTest()
         {
-            var area=new Area();
-            area.Height=34;
-            area.Left=406;
-            area.Top=280;
-            area.Width=387;
+            var area = new Area();
+            area.Height = 34;
+            area.Left = 406;
+            area.Top = 280;
+            area.Width = 387;
             Assert.AreEqual(rep.ValidationResults[0].ValidationObjects[0].Area.Top, area.Top);
         }
 
-  
+
         [OneTimeTearDown]
         public void CloseDriver()
         {

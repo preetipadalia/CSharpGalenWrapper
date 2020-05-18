@@ -88,7 +88,7 @@ namespace CSharpGalenWrapper.API
 
         private static IRestResponse ExecuteRequestCheckLayout(string req)
         {
-            var client = new RestClient("http://localhost:8080/checkLayout");
+            var client = new RestClient("http://localhost:"+ServerHelper.port+"/checkLayout");
             var request = new RestRequest(Method.POST);
             request.Parameters.Clear();
             request.AddParameter("application/json", req, ParameterType.RequestBody);
@@ -115,11 +115,11 @@ namespace CSharpGalenWrapper.API
             return response.Content;
         }
 
-        private static Request setupBrowserProperties(Browser browser, Request request1)
+        private  Request setupBrowserProperties(Browser browser, Request request1)
         {
             request1.Url = browser.Url;
             request1.BrowserType = browser.BrowserType;
-            request1.DriverPath = browser.DriverPath;
+            request1.DriverPath = ResolveRelativePath( browser.DriverPath);
             request1.BrowserHeight = browser.BrowserHeight;
             request1.BrowserWidth = browser.BrowserWidth;
             return request1;

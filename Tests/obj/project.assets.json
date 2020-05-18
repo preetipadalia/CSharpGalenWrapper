@@ -1223,7 +1223,7 @@
       },
       "CSharpGalenWrapper/1.0.0": {
         "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
+        "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
           "JSON.net": "1.0.22",
           "restsharp": "106.11.3",
@@ -4642,6 +4642,7 @@
         "netcoreapp3.1"
       ],
       "sources": {
+        "/Users/sachin/Preeti/restapi/test-api/CSharpGalenWrapper/src": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

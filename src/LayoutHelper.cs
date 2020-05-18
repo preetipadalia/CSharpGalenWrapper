@@ -53,11 +53,53 @@ namespace CSharpGalenWrapper
             LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
             return rep;
         }
+           public LayoutReport CheckLayout(Browser browser, string specFilePath, List<string> listIncluded)
+        {
+            var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, listIncluded, "", "", "");
+            LayoutReport rep = GetLayoutReportObject(layoutRep);
+            return rep;
+        }
+        public LayoutReport CheckLayout(Browser browser, string specFilePath, SectionFilter filter)
+        {
+            var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, filter, "", "", "");
+            LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
+            return rep;
+        }
+        public LayoutReport CheckLayout(Browser browser, string specFilePath, SectionFilter filter, Dictionary<string, string> properties)
+        {
+            var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, filter, properties, "", "", "");
+            LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
+            return rep;
+        }
+
+
+        public LayoutReport CheckLayoutAndCreateReport(Browser browser, string specFilePath, List<string> listIncluded, string testTitle, string reportTitle, string reportPath)
+        {
+            var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, listIncluded, testTitle, reportTitle, reportPath);
+            LayoutReport rep = GetLayoutReportObject(layoutRep);
+            return rep;
+        }
+        public LayoutReport CheckLayoutAndCreateReport(Browser browser,string specFilePath, SectionFilter filter, string testTitle, string reportTitle, string reportPath)
+        {
+            var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, filter, testTitle, reportTitle, reportPath);
+            LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
+            return rep;
+        }
+        public LayoutReport CheckLayoutAndCreateReport(Browser browser, string specFilePath, SectionFilter filter, Dictionary<string, string> properties, string testTitle, string reportTitle, string reportPath)
+        {
+            var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, filter, properties, testTitle, reportTitle, reportPath);
+            LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
+            return rep;
+        }
 
 
         private LayoutReport GetLayoutReportObject(string layoutRep)
         {
             Result result = JsonConvert.DeserializeObject<Result>(layoutRep);
+            if(result.ExceptionMessage!="no Exception")
+            {
+                throw new Exception(result.ExceptionMessage);
+            }
             LayoutReport report = result.Report;
             report.Errors = result.Errors;
             report.ExceptionMessage = result.ExceptionMessage;

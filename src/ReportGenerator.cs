@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CSharpGalenWrapper.API;
 using CSharpGalenWrapper.Report;
 using Newtonsoft.Json;
 using RestSharp;
@@ -26,7 +27,7 @@ internal class ReportGenerator
 
     private static IRestResponse ExecuteRequestGenerateReport(string req)
     {
-        var client = new RestClient("http://localhost:8080/generateReport");
+        var client = new RestClient("http://localhost:"+ServerHelper.port+"/generateReport");
         var request = new RestRequest(Method.POST);
         request.Parameters.Clear();
         request.AddParameter("application/json", req, ParameterType.RequestBody);
