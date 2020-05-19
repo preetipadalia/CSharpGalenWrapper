@@ -1,7 +1,7 @@
 # CSharpGalenWrapper
 
 This is a wrapper around Galen framework for csharp. 
-The NuGet can be used in folwwing ways:
+The solution can be used in following ways:
 
 If a new browser needs to be opened :
 	
