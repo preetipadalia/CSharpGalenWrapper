@@ -53,7 +53,7 @@ namespace CSharpGalenWrapper
             LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
             return rep;
         }
-           public LayoutReport CheckLayout(Browser browser, string specFilePath, List<string> listIncluded)
+        public LayoutReport CheckLayout(Browser browser, string specFilePath, List<string> listIncluded)
         {
             var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, listIncluded, "", "", "");
             LayoutReport rep = GetLayoutReportObject(layoutRep);
@@ -79,7 +79,7 @@ namespace CSharpGalenWrapper
             LayoutReport rep = GetLayoutReportObject(layoutRep);
             return rep;
         }
-        public LayoutReport CheckLayoutAndCreateReport(Browser browser,string specFilePath, SectionFilter filter, string testTitle, string reportTitle, string reportPath)
+        public LayoutReport CheckLayoutAndCreateReport(Browser browser, string specFilePath, SectionFilter filter, string testTitle, string reportTitle, string reportPath)
         {
             var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, filter, testTitle, reportTitle, reportPath);
             LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
@@ -96,7 +96,7 @@ namespace CSharpGalenWrapper
         private LayoutReport GetLayoutReportObject(string layoutRep)
         {
             Result result = JsonConvert.DeserializeObject<Result>(layoutRep);
-            if(result.ExceptionMessage!="no Exception")
+            if (result.ExceptionMessage != "no Exception")
             {
                 throw new Exception(result.ExceptionMessage);
             }
@@ -107,5 +107,14 @@ namespace CSharpGalenWrapper
             report.ValidationResults = result.ValidationResults;
             return report;
         }
+        public int StartGalenServer()
+        {
+            return ServerHelper.StartGalenServer();
+        }
+        public void StopGalenServer()
+        {
+            ServerHelper.StopGalenServer();
+        }
+
     }
 }

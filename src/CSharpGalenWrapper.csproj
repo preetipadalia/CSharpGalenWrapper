@@ -3,7 +3,14 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-
+ <PackageId>CsharpGalenWrapper</PackageId>
+  <Version>1.0.0</Version>
+  <Authors>Preeti</Authors>
+  <Description>
+      This is a wrapper around the existing Galen framework for Layout Testing.
+    </Description>
+    <RepositoryUrl>https://github.com/pp1609/CSharpGalenWrapper.git</RepositoryUrl> 
+    <RepositoryType>git</RepositoryType> 
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,10 +19,13 @@
     <PackageReference Include="selenium.webdriver" Version="3.141.0" />
   </ItemGroup>
   <ItemGroup>
-   <NativeLibs Include="GalenWrapperAPI-0.0.1.jar" />
-<None Include="@(NativeLibs)">
-  <Link>%(RecursiveDir)%(FileName)%(Extension)</Link>
-  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+<None Include="GalenWrapperAPI-0.0.1.jar">
+<Pack>true</Pack>
+  <PackagePath>build\</PackagePath>
+</None>
+<None Include="CSharpGalenWrapper.props">
+<Pack>true</Pack>
+  <PackagePath>build\</PackagePath>
 </None>
 </ItemGroup>
 

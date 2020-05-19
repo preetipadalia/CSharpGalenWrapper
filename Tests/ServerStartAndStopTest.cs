@@ -14,12 +14,14 @@ namespace Tests
     public class TestReportGeneration
     {
         IWebDriver driver;
+        CSharpGalenWrapper.LayoutHelper helper;
         LayoutReport rep;
         List<LayoutReport> tests;
         [OneTimeSetUp]
         public void Setup()
         {
-           Server.StartGalenServer();
+           helper = new CSharpGalenWrapper.LayoutHelper();
+            helper.StartGalenServer();
             // ReportHelper reportHelper=new ReportHelper();
             // reportHelper.GenerateReport("TestingResult/Tests",tests);
 
@@ -28,7 +30,7 @@ namespace Tests
         [Test]
         public void TestCheckLayout()
         {
-             driver = new ChromeDriver("/Users/sachin/Preeti");
+             driver = new ChromeDriver("chromedriver");
             driver.Navigate().GoToUrl("http://google.com");
 
             CSharpGalenWrapper.LayoutHelper helper = new CSharpGalenWrapper.LayoutHelper();
@@ -39,7 +41,7 @@ namespace Tests
          [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            Server.StopGalenServer();
+            helper.StopGalenServer();
         }
     }
 }

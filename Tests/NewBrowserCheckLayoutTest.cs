@@ -12,22 +12,23 @@ namespace Tests
     {
         IWebDriver driver;
         CSharpGalenWrapper.Report.LayoutReport rep;
+        CSharpGalenWrapper.LayoutHelper helper;
         [OneTimeSetUp]
         public void Setup()
         {
-            Server.StartGalenServer();
-            Browser browser=new Browser();
-            browser.BrowserHeight=300;
-            browser.BrowserWidth=400;
-            browser.BrowserType="chrome";
-            browser.DriverPath="/Users/sachin/Preeti/chromedriver";
-            browser.Url="http://google.com";
-            CSharpGalenWrapper.LayoutHelper helper = new CSharpGalenWrapper.LayoutHelper();
+            helper = new CSharpGalenWrapper.LayoutHelper();
+            helper.StartGalenServer();
+            Browser browser = new Browser();
+            browser.BrowserHeight = 300;
+            browser.BrowserWidth = 400;
+            browser.BrowserType = "chrome";
+            browser.DriverPath = "chromedriver/chromedriver";
+            browser.Url = "http://google.com";
             rep = helper.CheckLayout(browser, "specs/GoogleFailure.spec", new List<string>());
-Server.StopGalenServer();
+            helper.StopGalenServer();
         }
 
-    
+
 
         [Test]
         public void LayoutErrorCountTest()
@@ -41,24 +42,24 @@ Server.StopGalenServer();
             Assert.AreEqual(rep.ValidationResults[0].Error.Messages[0], "\"input\" is -106px below \"submit\" but it should be greater than or equal to 0px");
         }
 
-         [Test]
+        [Test]
         public void LayoutTestObjectNamePassTest()
         {
             Assert.AreEqual(rep.ValidationResults[0].ValidationObjects[0].Name, "input");
         }
 
-         [Test]
+        [Test]
         public void LayoutTestObjectAreaPassTest()
         {
-            var area=new Area();
-            area.Height=34;
-            area.Left=406;
-            area.Top=280;
-            area.Width=387;
+            var area = new Area();
+            area.Height = 34;
+            area.Left = 406;
+            area.Top = 280;
+            area.Width = 387;
             Assert.AreEqual(rep.ValidationResults[0].ValidationObjects[0].Area.Top, area.Top);
         }
 
-  
+
         [OneTimeTearDown]
         public void CloseDriver()
         {

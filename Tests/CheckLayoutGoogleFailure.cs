@@ -11,18 +11,20 @@ namespace Tests
     public class CheckLayoutGoogleFailure
     {
         IWebDriver driver;
+        CSharpGalenWrapper.LayoutHelper helper;
         CSharpGalenWrapper.Report.LayoutReport rep;
         [OneTimeSetUp]
         public void Setup()
         {
-            Server.StartGalenServer();
-            driver = new ChromeDriver("/Users/sachin/Preeti");
+             helper = new CSharpGalenWrapper.LayoutHelper();
+            helper.StartGalenServer();
+            driver = new ChromeDriver("chromedriver");
             driver.Navigate().GoToUrl("http://google.com");
             driver.Manage().Window.Size = new System.Drawing.Size(200, 300);
 
-            CSharpGalenWrapper.LayoutHelper helper = new CSharpGalenWrapper.LayoutHelper();
+             
             rep = helper.CheckLayout(driver, "specs/GoogleFailure.spec", new List<string>());
-            Server.StopGalenServer();
+            helper.StopGalenServer();
         }
 
         [Test]

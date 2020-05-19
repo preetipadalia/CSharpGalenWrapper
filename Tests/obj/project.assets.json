@@ -2,6 +2,23 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
+      "CSharpGalenWrapper/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "JSON.net": "1.0.22",
+          "restsharp": "106.11.3",
+          "selenium.webdriver": "3.141.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/CSharpGalenWrapper.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/CSharpGalenWrapper.dll": {}
+        },
+        "build": {
+          "build/CSharpGalenWrapper.props": {}
+        }
+      },
       "Json.Net/1.0.22": {
         "type": "package",
         "compile": {
@@ -1220,25 +1237,24 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
-      },
-      "CSharpGalenWrapper/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.1",
-        "dependencies": {
-          "JSON.net": "1.0.22",
-          "restsharp": "106.11.3",
-          "selenium.webdriver": "3.141.0"
-        },
-        "compile": {
-          "bin/placeholder/CSharpGalenWrapper.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/CSharpGalenWrapper.dll": {}
-        }
       }
     }
   },
   "libraries": {
+    "CSharpGalenWrapper/1.0.0": {
+      "sha512": "oh0HgY0Nf+tsynzEkU1L5tGOdGiH/iID+SJe+zsDWHEIYQXYuIBWfDclKVr1ax9OCeeOWJpBRcS/Qms5kjhA3g==",
+      "type": "package",
+      "path": "csharpgalenwrapper/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        "build/CSharpGalenWrapper.props",
+        "build/GalenWrapperAPI-0.0.1.jar",
+        "csharpgalenwrapper.1.0.0.nupkg.sha512",
+        "csharpgalenwrapper.nuspec",
+        "lib/netstandard2.0/CSharpGalenWrapper.dll",
+        "lib/netstandard2.1/CSharpGalenWrapper.dll"
+      ]
+    },
     "Json.Net/1.0.22": {
       "sha512": "y5xI87/heGiNZ859fsTORkoiB93qEW/rwLtxvJBAeQIoCCPoOLXzZiMx/HHg4WnR9UhcMH6Ec6m76jN+qqZVSg==",
       "type": "package",
@@ -4608,11 +4624,6 @@
         "system.xml.xpath.xmldocument.4.3.0.nupkg.sha512",
         "system.xml.xpath.xmldocument.nuspec"
       ]
-    },
-    "CSharpGalenWrapper/1.0.0": {
-      "type": "project",
-      "path": "../src/CSharpGalenWrapper.csproj",
-      "msbuildProject": "../src/CSharpGalenWrapper.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -4647,11 +4658,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "projectReferences": {
-            "/Users/sachin/Preeti/restapi/test-api/CSharpGalenWrapper/src/CSharpGalenWrapper.csproj": {
-              "projectPath": "/Users/sachin/Preeti/restapi/test-api/CSharpGalenWrapper/src/CSharpGalenWrapper.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
@@ -4663,6 +4670,10 @@
     "frameworks": {
       "netcoreapp3.1": {
         "dependencies": {
+          "CSharpGalenWrapper": {
+            "target": "Package",
+            "version": "[1.0.0, )"
+          },
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
             "version": "[16.4.0, )"

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using CSharpGalenWrapper.API;
 using CSharpGalenWrapper.Layout;
 using CSharpGalenWrapper.Report;
 using CSharpGalenWrapper.Report.Validation;
@@ -12,19 +13,21 @@ namespace Tests
     public class TageCheckLayout
     {
         IWebDriver driver;
+        CSharpGalenWrapper.LayoutHelper helper;
         LayoutReport rep;
         [OneTimeSetUp]
         public void Setup()
         {
-            driver = new ChromeDriver("/Users/sachin/Preeti");
+             helper = new CSharpGalenWrapper.LayoutHelper();
+            helper.StartGalenServer();
+            driver = new ChromeDriver("chromedriver");
             driver.Navigate().GoToUrl("http://google.com");
-            
+
             List<string> includedTags = new List<string>();
             includedTags.Add("mobile");
-           
-            CSharpGalenWrapper.LayoutHelper helper = new CSharpGalenWrapper.LayoutHelper();
-            rep = helper.CheckLayoutAndCreateReport(driver, Path.GetFullPath("specs/GooglePass.spec"),includedTags,"GoogleSearchPage","Validation of Google input","TestGoogleReport" );
 
+             rep = helper.CheckLayoutAndCreateReport(driver, "specs/GooglePass.spec", includedTags, "GoogleSearchPage", "Validation of Google input", "TestGoogleReport");
+            helper.StopGalenServer();
         }
 
         [Test]
@@ -39,7 +42,7 @@ namespace Tests
             Assert.AreEqual(rep.Errors, 0);
         }
 
-         [OneTimeTearDown]
+        [OneTimeTearDown]
         public void CloseDriver()
         {
             driver.Close();
