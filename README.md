@@ -5,7 +5,7 @@ The NuGet can be used in folwwing ways:
 
 If a new browser needs to be opened :
 	
-	          CSharpGalenWrapper.LayoutHelperhelper = new CSharpGalenWrapper.LayoutHelper();
+	    CSharpGalenWrapper.LayoutHelperhelper = new CSharpGalenWrapper.LayoutHelper();
             helper.StartGalenServer();
             Browser browser = new Browser();
             browser.BrowserHeight = 300;
