@@ -19,7 +19,7 @@ namespace CSharpGalenWrapper.API
 
             request1.Url = RemoteWebDriverHelper.GetExecutorURLFromDriver(driver).AbsoluteUri;
             request1.SessionId = driver.SessionId.ToString();
-            request1.SpecPath = ResolveRelativePath(specPath);
+            request1=GetSpecFilePath(specPath, request1);
             request1.IncludedTags = includedTags;
             request1 = setupReportSettings(testTitle, reportTitle, reportPath, request1);
             return ExecuteRequest(request1);
@@ -30,8 +30,8 @@ namespace CSharpGalenWrapper.API
         {
             Request request1 = new Request();
             request1 = setupBrowserProperties(browser, request1);
-            request1.SpecPath = ResolveRelativePath(specPath);
-            request1.IncludedTags = includedTags;
+           request1=GetSpecFilePath(specPath, request1);
+           request1.IncludedTags = includedTags;
             request1 = setupReportSettings(testTitle, reportTitle, reportPath, request1);
             return ExecuteRequest(request1);
 
@@ -39,7 +39,8 @@ namespace CSharpGalenWrapper.API
 
         private string ResolveRelativePath(string reportPath)
         {
-            return Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), reportPath));
+            var path=Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), reportPath));
+            return path;
         }
 
         internal String CheckLayoutPost(IWebDriver driver, string specFilePath, SectionFilter sectionFilter, string testTitle, string reportTitle, string reportPath)
@@ -48,7 +49,7 @@ namespace CSharpGalenWrapper.API
             Request request1 = new Request();
             request1.Url = RemoteWebDriverHelper.GetExecutorURLFromDriver(driver1).AbsoluteUri;
             request1.SessionId = driver1.SessionId.ToString();
-            request1.SpecPath = ResolveRelativePath(specFilePath);
+           request1=GetSpecFilePath(specFilePath, request1);
             request1.SectionFilter = sectionFilter;
             request1 = setupReportSettings(testTitle, reportTitle, reportPath, request1);
             return ExecuteRequest(request1);
@@ -59,10 +60,18 @@ namespace CSharpGalenWrapper.API
 
             Request request1 = new Request();
             request1 = setupBrowserProperties(browser, request1);
-            request1.SpecPath = ResolveRelativePath(specFilePath);
+            request1=GetSpecFilePath(specFilePath, request1);
             request1.SectionFilter = sectionFilter;
             request1 = setupReportSettings(testTitle, reportTitle, reportPath, request1);
             return ExecuteRequest(request1);
+        }
+
+        private Request GetSpecFilePath(string specFilePath, Request request1)
+        {
+            request1.SpecPath = ResolveRelativePath(specFilePath);
+            if (!File.Exists(request1.SpecPath))
+                throw new Exception("Spec File doesnot exists in :" + request1.SpecPath);
+        return request1;
         }
 
         private Request setupReportSettings(string testTitle, string reportTitle, string reportPath, Request request1)
@@ -101,7 +110,7 @@ namespace CSharpGalenWrapper.API
             // RemoteWebDriver driver1=(RemoteWebDriver)driver;
             Request request1 = new Request();
             request1 = setupBrowserProperties(browser, request1);
-            request1.SpecPath = ResolveRelativePath(specFilePath);
+           request1=GetSpecFilePath(specFilePath, request1);
             request1.SectionFilter = sectionFilter;
             request1.Properties = properties;
             request1 = setupReportSettings(testTitle, reportTitle, reportPath, request1);

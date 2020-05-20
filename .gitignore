@@ -7,3 +7,5 @@ Test/test.txt
 Tests/bin/*
 Tests/obj/*
 
+src/**/*.nupkg
+src/CSharpGalenWrapper.1.0.0.nupkg

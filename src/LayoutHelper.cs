@@ -15,13 +15,13 @@ namespace CSharpGalenWrapper
         {
             layoutAPI = new CheckLayoutAPI();
         }
-    /// <summary>
-    /// Check layout With Existing Driver
-    /// </summary>
-    /// <param name="driver"></param>
-    /// <param name="specFilePath"></param>
-    /// <param name="listIncluded"></param>
-    /// <returns></returns>
+        /// <summary>
+        /// Check layout With Existing Driver
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="specFilePath"></param>
+        /// <param name="listIncluded"></param>
+        /// <returns></returns>
         public LayoutReport CheckLayout(IWebDriver driver, string specFilePath, List<string> listIncluded)
         {
             var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, listIncluded, "", "", "");
@@ -57,16 +57,16 @@ namespace CSharpGalenWrapper
             return rep;
         }
 
-/// <summary>
-/// Check Layout With Existing Driver And Create Report
-/// </summary>
-/// <param name="driver"></param>
-/// <param name="specFilePath"></param>
-/// <param name="listIncluded"></param>
-/// <param name="testTitle"></param>
-/// <param name="reportTitle"></param>
-/// <param name="reportPath"></param>
-/// <returns></returns>
+        /// <summary>
+        /// Check Layout With Existing Driver And Create Report
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="specFilePath"></param>
+        /// <param name="listIncluded"></param>
+        /// <param name="testTitle"></param>
+        /// <param name="reportTitle"></param>
+        /// <param name="reportPath"></param>
+        /// <returns></returns>
         public LayoutReport CheckLayoutAndCreateReport(IWebDriver driver, string specFilePath, List<string> listIncluded, string testTitle, string reportTitle, string reportPath)
         {
             var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, listIncluded, testTitle, reportTitle, reportPath);
@@ -149,16 +149,16 @@ namespace CSharpGalenWrapper
             return rep;
         }
 
-/// <summary>
-/// Check Layout With New Driver And Create Report
-/// </summary>
-/// <param name="browser"></param>
-/// <param name="specFilePath"></param>
-/// <param name="listIncluded"></param>
-/// <param name="testTitle"></param>
-/// <param name="reportTitle"></param>
-/// <param name="reportPath"></param>
-/// <returns></returns>
+        /// <summary>
+        /// Check Layout With New Driver And Create Report
+        /// </summary>
+        /// <param name="browser"></param>
+        /// <param name="specFilePath"></param>
+        /// <param name="listIncluded"></param>
+        /// <param name="testTitle"></param>
+        /// <param name="reportTitle"></param>
+        /// <param name="reportPath"></param>
+        /// <returns></returns>
         public LayoutReport CheckLayoutAndCreateReport(Browser browser, string specFilePath, List<string> listIncluded, string testTitle, string reportTitle, string reportPath)
         {
             var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, listIncluded, testTitle, reportTitle, reportPath);
@@ -204,19 +204,27 @@ namespace CSharpGalenWrapper
 
         private LayoutReport GetLayoutReportObject(string layoutRep)
         {
-            Result result = JsonConvert.DeserializeObject<Result>(layoutRep);
-            if (result.ExceptionMessage != "no Exception")
+            try
             {
-                throw new Exception(result.ExceptionMessage);
+                Result result = JsonConvert.DeserializeObject<Result>(layoutRep);
+                if (result.ExceptionMessage != "no Exception")
+                {
+                    throw new Exception(result.ExceptionMessage);
+                }
+                LayoutReport report = result.Report;
+                report.Errors = result.Errors;
+                report.ExceptionMessage = result.ExceptionMessage;
+                report.Warnings = result.Warnings;
+                report.ValidationResults = result.ValidationResults;
+                return report;
             }
-            LayoutReport report = result.Report;
-            report.Errors = result.Errors;
-            report.ExceptionMessage = result.ExceptionMessage;
-            report.Warnings = result.Warnings;
-            report.ValidationResults = result.ValidationResults;
-            return report;
+            catch
+            {
+                throw new Exception(layoutRep);
+            }
+
         }
-        public int StartGalenServer(string serverPath="")
+        public int StartGalenServer(string serverPath = "")
         {
             return ServerHelper.StartGalenServer(serverPath);
         }

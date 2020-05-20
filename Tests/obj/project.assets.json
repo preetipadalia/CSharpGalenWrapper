@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "CsharpGalenWrapper/1.0.0": {
+      "CsharpGalenWrapper/1.0.1": {
         "type": "package",
         "dependencies": {
           "JSON.net": "1.0.22",
@@ -1241,18 +1241,21 @@
     }
   },
   "libraries": {
-    "CsharpGalenWrapper/1.0.0": {
-      "sha512": "dY90Xt1ZNVODlJlqVh7LS5ndYdhOslO03RvTnKU1V8HSNzhucDEOZmIB2auvWYWFpkR+kusa5eh/kO+1GsN67Q==",
+    "CsharpGalenWrapper/1.0.1": {
+      "sha512": "MNjVrUQNzNNF072r/+Gbu4O1rL2UUuUflBIReTtyrlk1v22yBDrbzSia56IcTQROtAag7lw9Tq9JoEBbFaTF7A==",
       "type": "package",
-      "path": "csharpgalenwrapper/1.0.0",
+      "path": "csharpgalenwrapper/1.0.1",
       "files": [
         ".nupkg.metadata",
+        "LICENSE/LICENSE",
         "build/CsharpGalenWrapper.props",
         "build/GalenWrapperAPI-0.0.1.jar",
-        "csharpgalenwrapper.1.0.0.nupkg.sha512",
+        "csharpgalenwrapper.1.0.1.nupkg.sha512",
         "csharpgalenwrapper.nuspec",
         "lib/netstandard2.0/CSharpGalenWrapper.dll",
-        "lib/netstandard2.1/CSharpGalenWrapper.dll"
+        "lib/netstandard2.0/CSharpGalenWrapper.xml",
+        "lib/netstandard2.1/CSharpGalenWrapper.dll",
+        "lib/netstandard2.1/CSharpGalenWrapper.xml"
       ]
     },
     "Json.Net/1.0.22": {
@@ -4628,7 +4631,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "CSharpGalenWrapper >= 1.0.0",
+      "CSharpGalenWrapper >= 1.0.1",
       "Microsoft.NET.Test.Sdk >= 16.4.0",
       "NUnit3TestAdapter >= 3.15.1",
       "nunit >= 3.12.0"
@@ -4672,7 +4675,7 @@
         "dependencies": {
           "CSharpGalenWrapper": {
             "target": "Package",
-            "version": "[1.0.0, )"
+            "version": "[1.0.1, )"
           },
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",

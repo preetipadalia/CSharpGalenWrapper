@@ -17,36 +17,52 @@ namespace CSharpGalenWrapper.API
     {
         static Process process;
         internal static int port;
-        internal static int StartGalenServer(string serverPath="")
+        internal static int StartGalenServer(string serverPath = "")
         {
-            if(serverPath.Trim()=="")
-            serverPath=Environment.CurrentDirectory;
+            ValidateIfGalenServerFileExists(serverPath); 
+            if (serverPath.Trim() == "")
+                serverPath = Environment.CurrentDirectory;
             port = GetAvailablePort(9000);
             process = new Process();
             process.StartInfo.FileName = "Java";
-            process.StartInfo.WorkingDirectory=serverPath;
+            process.StartInfo.WorkingDirectory = serverPath;
             process.StartInfo.Arguments = "-jar -Dserver.port=" + port + " GalenWrapperAPI-0.0.1.jar";
             DateTime previousTime = DateTime.Now;
-            bool isStarted=process.Start();
-            if(isStarted)
+            bool isStarted = process.Start();
+            if (isStarted)
             {
-            bool serverUp = false;
-            int timeouts = 120;
-            DateTime newTime = DateTime.Now;
 
-            while (!serverUp && (newTime - previousTime).Seconds <= 180)
-            {
-                serverUp = IsServerUp(serverUp);
-                newTime = DateTime.Now;
-            }
-            if (!IsServerUp(serverUp))
-                throw new Exception("Unable to start the server.");
+                bool serverUp = false;
+                int timeouts = 120;
+                DateTime newTime = DateTime.Now;
+
+                while (!serverUp)
+                {
+                    ValidateIfServerProcessIsRunning(); 
+                    serverUp = IsServerUp(serverUp);
+                    newTime = DateTime.Now;
+                }
+                if (!IsServerUp(serverUp))
+                    throw new Exception("Unable to start the server.");
                 return process.Id;
             }
             else
-            throw new Exception("Unable to start the server");
+                throw new Exception("Unable to start the server");
 
         }
+
+        private static void ValidateIfServerProcessIsRunning()
+        {
+            if (process.HasExited)
+                throw new Exception("Galen server is not running or unable to start.");
+        }
+
+        private static void ValidateIfGalenServerFileExists(string serverPath)
+        {
+            if (!File.Exists(Path.Combine(serverPath, "GalenWrapperAPI-0.0.1.jar")))
+                throw new Exception("Galen Server jar :GalenWrapperAPI-0.0.1.jar not found.");
+        }
+
         internal static int GetAvailablePort(int startingPort)
         {
             var properties = IPGlobalProperties.GetIPGlobalProperties();
