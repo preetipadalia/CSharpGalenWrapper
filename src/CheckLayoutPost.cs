@@ -88,7 +88,7 @@ namespace CSharpGalenWrapper.API
             Request request1 = new Request();
             request1.Url = RemoteWebDriverHelper.GetExecutorURLFromDriver(driver1).AbsoluteUri;
             request1.SessionId = driver1.SessionId.ToString();
-            request1.SpecPath = ResolveRelativePath(specFilePath);
+            request1=GetSpecFilePath(specFilePath, request1);
             request1.SectionFilter = sectionFilter;
             request1.Properties = properties;
             request1 = setupReportSettings(testTitle, reportTitle, reportPath, request1);

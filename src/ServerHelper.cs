@@ -59,8 +59,8 @@ namespace CSharpGalenWrapper.API
 
         private static void ValidateIfGalenServerFileExists(string serverPath)
         {
-            if (!File.Exists(Path.Combine(serverPath, "GalenWrapperAPI-0.0.1.jar")))
-                throw new Exception("Galen Server jar :GalenWrapperAPI-0.0.1.jar not found.");
+            if (!File.Exists(Path.GetFullPath( Path.Combine(serverPath, "GalenWrapperAPI-0.0.1.jar"))))
+                throw new Exception("Galen Server jar :GalenWrapperAPI-0.0.1.jar not found at path :"+Path.GetFullPath( Path.Combine(serverPath, "GalenWrapperAPI-0.0.1.jar")));
         }
 
         internal static int GetAvailablePort(int startingPort)
