@@ -15,18 +15,41 @@ namespace CSharpGalenWrapper
         {
             layoutAPI = new CheckLayoutAPI();
         }
+    /// <summary>
+    /// Check layout With Existing Driver
+    /// </summary>
+    /// <param name="driver"></param>
+    /// <param name="specFilePath"></param>
+    /// <param name="listIncluded"></param>
+    /// <returns></returns>
         public LayoutReport CheckLayout(IWebDriver driver, string specFilePath, List<string> listIncluded)
         {
             var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, listIncluded, "", "", "");
             LayoutReport rep = GetLayoutReportObject(layoutRep);
             return rep;
         }
+
+        /// <summary>
+        /// Check Layout With Existing Driver
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="specFilePath"></param>
+        /// <param name="filter"></param>
+        /// <returns></returns>
         public LayoutReport CheckLayout(IWebDriver driver, string specFilePath, SectionFilter filter)
         {
             var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, filter, "", "", "");
             LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
             return rep;
         }
+        /// <summary>
+        /// CheckLayout With Existing Driver
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="specFilePath"></param>
+        /// <param name="filter"></param>
+        /// <param name="properties"></param>
+        /// <returns></returns>
         public LayoutReport CheckLayout(IWebDriver driver, string specFilePath, SectionFilter filter, Dictionary<string, string> properties)
         {
             var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, filter, properties, "", "", "");
@@ -34,37 +57,91 @@ namespace CSharpGalenWrapper
             return rep;
         }
 
-
+/// <summary>
+/// Check Layout With Existing Driver And Create Report
+/// </summary>
+/// <param name="driver"></param>
+/// <param name="specFilePath"></param>
+/// <param name="listIncluded"></param>
+/// <param name="testTitle"></param>
+/// <param name="reportTitle"></param>
+/// <param name="reportPath"></param>
+/// <returns></returns>
         public LayoutReport CheckLayoutAndCreateReport(IWebDriver driver, string specFilePath, List<string> listIncluded, string testTitle, string reportTitle, string reportPath)
         {
             var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, listIncluded, testTitle, reportTitle, reportPath);
             LayoutReport rep = GetLayoutReportObject(layoutRep);
             return rep;
         }
+        /// <summary>
+        /// Check Layout With Existing Driver And Create Report
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="specFilePath"></param>
+        /// <param name="filter"></param>
+        /// <param name="testTitle"></param>
+        /// <param name="reportTitle"></param>
+        /// <param name="reportPath"></param>
+        /// <returns></returns>
         public LayoutReport CheckLayoutAndCreateReport(IWebDriver driver, string specFilePath, SectionFilter filter, string testTitle, string reportTitle, string reportPath)
         {
             var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, filter, testTitle, reportTitle, reportPath);
             LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
             return rep;
         }
+        /// <summary>
+        /// Check Layout With Existing Driver And Create Report
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="specFilePath"></param>
+        /// <param name="filter"></param>
+        /// <param name="properties"></param>
+        /// <param name="testTitle"></param>
+        /// <param name="reportTitle"></param>
+        /// <param name="reportPath"></param>
+        /// <returns></returns>
         public LayoutReport CheckLayoutAndCreateReport(IWebDriver driver, string specFilePath, SectionFilter filter, Dictionary<string, string> properties, string testTitle, string reportTitle, string reportPath)
         {
             var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, filter, properties, testTitle, reportTitle, reportPath);
             LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
             return rep;
         }
+
+        /// <summary>
+        /// Check Layout With New Driver
+        /// </summary>
+        /// <param name="browser"></param>
+        /// <param name="specFilePath"></param>
+        /// <param name="listIncluded"></param>
+        /// <returns></returns>
         public LayoutReport CheckLayout(Browser browser, string specFilePath, List<string> listIncluded)
         {
             var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, listIncluded, "", "", "");
             LayoutReport rep = GetLayoutReportObject(layoutRep);
             return rep;
         }
+        /// <summary>
+        /// Check Layout With New Driver
+        /// </summary>
+        /// <param name="browser"></param>
+        /// <param name="specFilePath"></param>
+        /// <param name="filter"></param>
+        /// <returns></returns>
         public LayoutReport CheckLayout(Browser browser, string specFilePath, SectionFilter filter)
         {
             var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, filter, "", "", "");
             LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
             return rep;
         }
+
+        /// <summary>
+        /// Check Layout With New Driver
+        /// </summary>
+        /// <param name="browser"></param>
+        /// <param name="specFilePath"></param>
+        /// <param name="filter"></param>
+        /// <param name="properties"></param>
+        /// <returns></returns>
         public LayoutReport CheckLayout(Browser browser, string specFilePath, SectionFilter filter, Dictionary<string, string> properties)
         {
             var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, filter, properties, "", "", "");
@@ -72,19 +149,51 @@ namespace CSharpGalenWrapper
             return rep;
         }
 
-
+/// <summary>
+/// Check Layout With New Driver And Create Report
+/// </summary>
+/// <param name="browser"></param>
+/// <param name="specFilePath"></param>
+/// <param name="listIncluded"></param>
+/// <param name="testTitle"></param>
+/// <param name="reportTitle"></param>
+/// <param name="reportPath"></param>
+/// <returns></returns>
         public LayoutReport CheckLayoutAndCreateReport(Browser browser, string specFilePath, List<string> listIncluded, string testTitle, string reportTitle, string reportPath)
         {
             var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, listIncluded, testTitle, reportTitle, reportPath);
             LayoutReport rep = GetLayoutReportObject(layoutRep);
             return rep;
         }
+
+        /// <summary>
+        /// Check Layout With New Driver And Create Report
+        /// </summary>
+        /// <param name="browser"></param>
+        /// <param name="specFilePath"></param>
+        /// <param name="filter"></param>
+        /// <param name="testTitle"></param>
+        /// <param name="reportTitle"></param>
+        /// <param name="reportPath"></param>
+        /// <returns></returns>
         public LayoutReport CheckLayoutAndCreateReport(Browser browser, string specFilePath, SectionFilter filter, string testTitle, string reportTitle, string reportPath)
         {
             var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, filter, testTitle, reportTitle, reportPath);
             LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
             return rep;
         }
+
+        /// <summary>
+        /// Check Layout With New Driver
+        /// </summary>
+        /// <param name="browser"></param>
+        /// <param name="specFilePath"></param>
+        /// <param name="filter"></param>
+        /// <param name="properties"></param>
+        /// <param name="testTitle"></param>
+        /// <param name="reportTitle"></param>
+        /// <param name="reportPath"></param>
+        /// <returns></returns>
         public LayoutReport CheckLayoutAndCreateReport(Browser browser, string specFilePath, SectionFilter filter, Dictionary<string, string> properties, string testTitle, string reportTitle, string reportPath)
         {
             var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, filter, properties, testTitle, reportTitle, reportPath);
@@ -107,9 +216,9 @@ namespace CSharpGalenWrapper
             report.ValidationResults = result.ValidationResults;
             return report;
         }
-        public int StartGalenServer()
+        public int StartGalenServer(string serverPath="")
         {
-            return ServerHelper.StartGalenServer();
+            return ServerHelper.StartGalenServer(serverPath);
         }
         public void StopGalenServer()
         {

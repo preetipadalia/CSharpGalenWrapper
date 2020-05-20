@@ -17,14 +17,19 @@ namespace CSharpGalenWrapper.API
     {
         static Process process;
         internal static int port;
-        internal static int StartGalenServer()
+        internal static int StartGalenServer(string serverPath="")
         {
+            if(serverPath.Trim()=="")
+            serverPath=Environment.CurrentDirectory;
             port = GetAvailablePort(9000);
             process = new Process();
             process.StartInfo.FileName = "Java";
+            process.StartInfo.WorkingDirectory=serverPath;
             process.StartInfo.Arguments = "-jar -Dserver.port=" + port + " GalenWrapperAPI-0.0.1.jar";
             DateTime previousTime = DateTime.Now;
-            process.Start();
+            bool isStarted=process.Start();
+            if(isStarted)
+            {
             bool serverUp = false;
             int timeouts = 120;
             DateTime newTime = DateTime.Now;
@@ -37,6 +42,9 @@ namespace CSharpGalenWrapper.API
             if (!IsServerUp(serverUp))
                 throw new Exception("Unable to start the server.");
                 return process.Id;
+            }
+            else
+            throw new Exception("Unable to start the server");
 
         }
         internal static int GetAvailablePort(int startingPort)
