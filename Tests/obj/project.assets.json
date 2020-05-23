@@ -2,23 +2,6 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "CsharpGalenWrapper/1.0.1": {
-        "type": "package",
-        "dependencies": {
-          "JSON.net": "1.0.22",
-          "restsharp": "106.11.3",
-          "selenium.webdriver": "3.141.0"
-        },
-        "compile": {
-          "lib/netstandard2.1/CSharpGalenWrapper.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.1/CSharpGalenWrapper.dll": {}
-        },
-        "build": {
-          "build/CsharpGalenWrapper.props": {}
-        }
-      },
       "Json.Net/1.0.22": {
         "type": "package",
         "compile": {
@@ -500,6 +483,12 @@
         },
         "runtime": {
           "lib/netstandard2.0/WebDriver.dll": {}
+        }
+      },
+      "Selenium.WebDriver.ChromeDriver/83.0.4103.3900": {
+        "type": "package",
+        "build": {
+          "build/Selenium.WebDriver.ChromeDriver.targets": {}
         }
       },
       "System.AppContext/4.1.0": {
@@ -1237,27 +1226,25 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
+      },
+      "CsharpGalenWrapper/1.0.3": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "dependencies": {
+          "JSON.net": "1.0.22",
+          "restsharp": "106.11.3",
+          "selenium.webdriver": "3.141.0"
+        },
+        "compile": {
+          "bin/placeholder/CsharpGalenWrapper.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CsharpGalenWrapper.dll": {}
+        }
       }
     }
   },
   "libraries": {
-    "CsharpGalenWrapper/1.0.1": {
-      "sha512": "MNjVrUQNzNNF072r/+Gbu4O1rL2UUuUflBIReTtyrlk1v22yBDrbzSia56IcTQROtAag7lw9Tq9JoEBbFaTF7A==",
-      "type": "package",
-      "path": "csharpgalenwrapper/1.0.1",
-      "files": [
-        ".nupkg.metadata",
-        "LICENSE/LICENSE",
-        "build/CsharpGalenWrapper.props",
-        "build/GalenWrapperAPI-0.0.1.jar",
-        "csharpgalenwrapper.1.0.1.nupkg.sha512",
-        "csharpgalenwrapper.nuspec",
-        "lib/netstandard2.0/CSharpGalenWrapper.dll",
-        "lib/netstandard2.0/CSharpGalenWrapper.xml",
-        "lib/netstandard2.1/CSharpGalenWrapper.dll",
-        "lib/netstandard2.1/CSharpGalenWrapper.xml"
-      ]
-    },
     "Json.Net/1.0.22": {
       "sha512": "y5xI87/heGiNZ859fsTORkoiB93qEW/rwLtxvJBAeQIoCCPoOLXzZiMx/HHg4WnR9UhcMH6Ec6m76jN+qqZVSg==",
       "type": "package",
@@ -1998,6 +1985,21 @@
         "lib/netstandard2.0/WebDriver.xml",
         "selenium.webdriver.3.141.0.nupkg.sha512",
         "selenium.webdriver.nuspec"
+      ]
+    },
+    "Selenium.WebDriver.ChromeDriver/83.0.4103.3900": {
+      "sha512": "lbVAHeSPf5E0IJNtsO5sf1rQhaA1ePoHfaA3o2XZBMsQVDOkM1WpDeTe9KyuPKabdluUvVbt7vkufxlZLCGJ6w==",
+      "type": "package",
+      "path": "selenium.webdriver.chromedriver/83.0.4103.3900",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/Selenium.WebDriver.ChromeDriver.targets",
+        "driver/linux64/chromedriver",
+        "driver/mac64/chromedriver",
+        "driver/win32/chromedriver.exe",
+        "selenium.webdriver.chromedriver.83.0.4103.3900.nupkg.sha512",
+        "selenium.webdriver.chromedriver.nuspec"
       ]
     },
     "System.AppContext/4.1.0": {
@@ -4627,13 +4629,19 @@
         "system.xml.xpath.xmldocument.4.3.0.nupkg.sha512",
         "system.xml.xpath.xmldocument.nuspec"
       ]
+    },
+    "CsharpGalenWrapper/1.0.3": {
+      "type": "project",
+      "path": "../src/CSharpGalenWrapper.csproj",
+      "msbuildProject": "../src/CSharpGalenWrapper.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "CSharpGalenWrapper >= 1.0.1",
+      "CsharpGalenWrapper >= 1.0.3",
       "Microsoft.NET.Test.Sdk >= 16.4.0",
       "NUnit3TestAdapter >= 3.15.1",
+      "Selenium.WebDriver.ChromeDriver >= 83.0.4103.3900",
       "nunit >= 3.12.0"
     ]
   },
@@ -4661,7 +4669,11 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/sachin/Preeti/restapi/test-api/CSharpGalenWrapper/src/CSharpGalenWrapper.csproj": {
+              "projectPath": "/Users/sachin/Preeti/restapi/test-api/CSharpGalenWrapper/src/CSharpGalenWrapper.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -4673,10 +4685,6 @@
     "frameworks": {
       "netcoreapp3.1": {
         "dependencies": {
-          "CSharpGalenWrapper": {
-            "target": "Package",
-            "version": "[1.0.1, )"
-          },
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
             "version": "[16.4.0, )"
@@ -4684,6 +4692,10 @@
           "NUnit3TestAdapter": {
             "target": "Package",
             "version": "[3.15.1, )"
+          },
+          "Selenium.WebDriver.ChromeDriver": {
+            "target": "Package",
+            "version": "[83.0.4103.3900, )"
           },
           "nunit": {
             "target": "Package",

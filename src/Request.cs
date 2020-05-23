@@ -18,6 +18,7 @@ namespace CSharpGalenWrapper.Layout
         private SectionFilter sectionFilter;
         private int browserHeight;
         private int browserWidth;
+        private bool reportEnabled;
 
         public string SessionId { get => sessionId; set => sessionId = value; }
         public string Url { get => url; set => url = value; }
@@ -32,7 +33,7 @@ namespace CSharpGalenWrapper.Layout
         public string DriverPath { get => driverPath; set => driverPath = value; }
         public int BrowserHeight { get => browserHeight; set => browserHeight = value; }
         public int BrowserWidth { get => browserWidth; set => browserWidth = value; }
-
+        public bool ReportEnabled { get => reportEnabled; set => reportEnabled = value; }
     }
 
     public class SectionFilter

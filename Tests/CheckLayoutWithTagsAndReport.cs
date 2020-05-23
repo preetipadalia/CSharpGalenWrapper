@@ -20,7 +20,7 @@ namespace Tests
         {
               helper = new CSharpGalenWrapper.LayoutHelper();
             helper.StartGalenServer();
-            driver = new ChromeDriver("chromedriver");
+            driver = new ChromeDriver();
             driver.Navigate().GoToUrl("http://google.com");
             List<string> includedTags = new List<string>();
             includedTags.Add("mobile");

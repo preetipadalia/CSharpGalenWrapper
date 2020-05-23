@@ -25,6 +25,9 @@
 <None Include="GalenWrapperAPI-0.0.1.jar">
 <Pack>true</Pack>
   <PackagePath>build</PackagePath>
+   <Link>GalenWrapperAPI-0.0.1.jar</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Visible>False</Visible>
 </None>
 <None Include="CsharpGalenWrapper.props">
 <Pack>true</Pack>

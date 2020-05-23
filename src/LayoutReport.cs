@@ -7,6 +7,9 @@ namespace CSharpGalenWrapper.Report
 
     public partial class LayoutReport
     {
+        
+        [JsonProperty("id")]
+        public string Id{get;set;}
         [JsonProperty("title")]
         public string Title { get; set; }
 
@@ -31,14 +34,8 @@ namespace CSharpGalenWrapper.Report
         [JsonProperty("warnings")]
         public long Warnings { get; set; }
 
-        [JsonProperty("report")]
-        public LayoutReport Report { get; set; }
-
         [JsonProperty("validationResults")]
         public ValidationResult[] ValidationResults { get; set; }
-
-        [JsonProperty("galenTestInfo")]
-        public GalenTestInfo GalenTestInfo { get; set; }
 
         [JsonProperty("exceptionMessage")]
         public string ExceptionMessage { get; set; }

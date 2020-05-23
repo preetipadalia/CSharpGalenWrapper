@@ -69,7 +69,7 @@ namespace CSharpGalenWrapper
         /// <returns></returns>
         public LayoutReport CheckLayoutAndCreateReport(IWebDriver driver, string specFilePath, List<string> listIncluded, string testTitle, string reportTitle, string reportPath)
         {
-            var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, listIncluded, testTitle, reportTitle, reportPath);
+            var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, listIncluded, testTitle, reportTitle, reportPath,true);
             LayoutReport rep = GetLayoutReportObject(layoutRep);
             return rep;
         }
@@ -85,7 +85,7 @@ namespace CSharpGalenWrapper
         /// <returns></returns>
         public LayoutReport CheckLayoutAndCreateReport(IWebDriver driver, string specFilePath, SectionFilter filter, string testTitle, string reportTitle, string reportPath)
         {
-            var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, filter, testTitle, reportTitle, reportPath);
+            var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, filter, testTitle, reportTitle, reportPath,true);
             LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
             return rep;
         }
@@ -102,7 +102,7 @@ namespace CSharpGalenWrapper
         /// <returns></returns>
         public LayoutReport CheckLayoutAndCreateReport(IWebDriver driver, string specFilePath, SectionFilter filter, Dictionary<string, string> properties, string testTitle, string reportTitle, string reportPath)
         {
-            var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, filter, properties, testTitle, reportTitle, reportPath);
+            var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, filter, properties, testTitle, reportTitle, reportPath,true);
             LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
             return rep;
         }
@@ -161,7 +161,7 @@ namespace CSharpGalenWrapper
         /// <returns></returns>
         public LayoutReport CheckLayoutAndCreateReport(Browser browser, string specFilePath, List<string> listIncluded, string testTitle, string reportTitle, string reportPath)
         {
-            var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, listIncluded, testTitle, reportTitle, reportPath);
+            var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, listIncluded, testTitle, reportTitle, reportPath,true);
             LayoutReport rep = GetLayoutReportObject(layoutRep);
             return rep;
         }
@@ -178,7 +178,7 @@ namespace CSharpGalenWrapper
         /// <returns></returns>
         public LayoutReport CheckLayoutAndCreateReport(Browser browser, string specFilePath, SectionFilter filter, string testTitle, string reportTitle, string reportPath)
         {
-            var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, filter, testTitle, reportTitle, reportPath);
+            var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, filter, testTitle, reportTitle, reportPath,true);
             LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
             return rep;
         }
@@ -196,7 +196,7 @@ namespace CSharpGalenWrapper
         /// <returns></returns>
         public LayoutReport CheckLayoutAndCreateReport(Browser browser, string specFilePath, SectionFilter filter, Dictionary<string, string> properties, string testTitle, string reportTitle, string reportPath)
         {
-            var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, filter, properties, testTitle, reportTitle, reportPath);
+            var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, filter, properties, testTitle, reportTitle, reportPath,true);
             LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
             return rep;
         }
@@ -212,6 +212,7 @@ namespace CSharpGalenWrapper
                     throw new Exception(result.ExceptionMessage);
                 }
                 LayoutReport report = result.Report;
+                report.Id=result.Id;
                 report.Errors = result.Errors;
                 report.ExceptionMessage = result.ExceptionMessage;
                 report.Warnings = result.Warnings;

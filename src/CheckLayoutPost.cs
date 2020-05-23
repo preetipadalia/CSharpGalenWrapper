@@ -12,7 +12,7 @@ namespace CSharpGalenWrapper.API
 {
     internal class CheckLayoutAPI
     {
-        internal string CheckLayoutPost(IWebDriver driver1, string specPath, List<string> includedTags, string testTitle, string reportTitle, string reportPath)
+        internal string CheckLayoutPost(IWebDriver driver1, string specPath, List<string> includedTags, string testTitle, string reportTitle, string reportPath,bool isReportEnabled=false)
         {
             RemoteWebDriver driver = (RemoteWebDriver)driver1;
             Request request1 = new Request();
@@ -21,17 +21,19 @@ namespace CSharpGalenWrapper.API
             request1.SessionId = driver.SessionId.ToString();
             request1=GetSpecFilePath(specPath, request1);
             request1.IncludedTags = includedTags;
+            request1.ReportEnabled=isReportEnabled;
             request1 = setupReportSettings(testTitle, reportTitle, reportPath, request1);
             return ExecuteRequest(request1);
 
         }
 
-        internal string CheckLayoutPost(Browser browser, string specPath, List<string> includedTags, string testTitle, string reportTitle, string reportPath)
+        internal string CheckLayoutPost(Browser browser, string specPath, List<string> includedTags, string testTitle, string reportTitle, string reportPath,bool isReportEnabled=false)
         {
             Request request1 = new Request();
             request1 = setupBrowserProperties(browser, request1);
            request1=GetSpecFilePath(specPath, request1);
            request1.IncludedTags = includedTags;
+            request1.ReportEnabled=isReportEnabled;
             request1 = setupReportSettings(testTitle, reportTitle, reportPath, request1);
             return ExecuteRequest(request1);
 
@@ -43,7 +45,7 @@ namespace CSharpGalenWrapper.API
             return path;
         }
 
-        internal String CheckLayoutPost(IWebDriver driver, string specFilePath, SectionFilter sectionFilter, string testTitle, string reportTitle, string reportPath)
+        internal String CheckLayoutPost(IWebDriver driver, string specFilePath, SectionFilter sectionFilter, string testTitle, string reportTitle, string reportPath,bool isReportEnabled=false)
         {
             RemoteWebDriver driver1 = (RemoteWebDriver)driver;
             Request request1 = new Request();
@@ -51,17 +53,19 @@ namespace CSharpGalenWrapper.API
             request1.SessionId = driver1.SessionId.ToString();
            request1=GetSpecFilePath(specFilePath, request1);
             request1.SectionFilter = sectionFilter;
+             request1.ReportEnabled=isReportEnabled;
             request1 = setupReportSettings(testTitle, reportTitle, reportPath, request1);
             return ExecuteRequest(request1);
         }
 
-        internal String CheckLayoutPost(Browser browser, string specFilePath, SectionFilter sectionFilter, string testTitle, string reportTitle, string reportPath)
+        internal String CheckLayoutPost(Browser browser, string specFilePath, SectionFilter sectionFilter, string testTitle, string reportTitle, string reportPath,bool isReportEnabled=false)
         {
 
             Request request1 = new Request();
             request1 = setupBrowserProperties(browser, request1);
             request1=GetSpecFilePath(specFilePath, request1);
             request1.SectionFilter = sectionFilter;
+             request1.ReportEnabled=isReportEnabled;
             request1 = setupReportSettings(testTitle, reportTitle, reportPath, request1);
             return ExecuteRequest(request1);
         }
@@ -82,7 +86,7 @@ namespace CSharpGalenWrapper.API
             return request1;
         }
 
-        internal String CheckLayoutPost(IWebDriver driver, string specFilePath, SectionFilter sectionFilter, Dictionary<string, string> properties, string testTitle, string reportTitle, string reportPath)
+        internal String CheckLayoutPost(IWebDriver driver, string specFilePath, SectionFilter sectionFilter, Dictionary<string, string> properties, string testTitle, string reportTitle, string reportPath,bool isReportEnabled=false)
         {
             RemoteWebDriver driver1 = (RemoteWebDriver)driver;
             Request request1 = new Request();
@@ -91,6 +95,7 @@ namespace CSharpGalenWrapper.API
             request1=GetSpecFilePath(specFilePath, request1);
             request1.SectionFilter = sectionFilter;
             request1.Properties = properties;
+             request1.ReportEnabled=isReportEnabled;
             request1 = setupReportSettings(testTitle, reportTitle, reportPath, request1);
             return ExecuteRequest(request1);
         }
@@ -105,7 +110,7 @@ namespace CSharpGalenWrapper.API
             return response;
         }
 
-        internal String CheckLayoutPost(Browser browser, string specFilePath, SectionFilter sectionFilter, Dictionary<string, string> properties, string testTitle, string reportTitle, string reportPath)
+        internal String CheckLayoutPost(Browser browser, string specFilePath, SectionFilter sectionFilter, Dictionary<string, string> properties, string testTitle, string reportTitle, string reportPath,bool isReportEnabled=false)
         {
             // RemoteWebDriver driver1=(RemoteWebDriver)driver;
             Request request1 = new Request();
@@ -113,6 +118,7 @@ namespace CSharpGalenWrapper.API
            request1=GetSpecFilePath(specFilePath, request1);
             request1.SectionFilter = sectionFilter;
             request1.Properties = properties;
+             request1.ReportEnabled=isReportEnabled;
             request1 = setupReportSettings(testTitle, reportTitle, reportPath, request1);
             return ExecuteRequest(request1);
         }

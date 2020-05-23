@@ -22,7 +22,7 @@ namespace Tests
             browser.BrowserHeight = 300;
             browser.BrowserWidth = 400;
             browser.BrowserType = "chrome";
-            browser.DriverPath = "chromedriver/chromedriver";
+            browser.DriverPath = "chromedriver";
             browser.Url = "http://google.com";
             rep = helper.CheckLayout(browser, "specs/GoogleFailure.spec", new List<string>());
             helper.StopGalenServer();

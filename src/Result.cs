@@ -7,12 +7,16 @@ using Newtonsoft.Json;
 
 public partial class Result
 {
+
+    [JsonProperty("id")]
+    public string Id { get; set; }
+
     [JsonProperty("ExcludedTags")]
     public String[] ExcludedTags { get; set; }
 
     [JsonProperty("errors")]
     public long Errors { get; set; }
-    
+
     [JsonProperty("warnings")]
     public long Warnings { get; set; }
 
@@ -22,15 +26,11 @@ public partial class Result
     [JsonProperty("objects")]
     public Dictionary<string, LayoutObjectDetails> Objects { get; set; }
 
-
     [JsonProperty("report")]
     public LayoutReport Report { get; set; }
 
     [JsonProperty("validationResults")]
     public ValidationResult[] ValidationResults { get; set; }
-
-    [JsonProperty("galenTestInfo")]
-    public GalenTestInfo GalenTestInfo { get; set; }
 
     [JsonProperty("exceptionMessage")]
     public string ExceptionMessage { get; set; }

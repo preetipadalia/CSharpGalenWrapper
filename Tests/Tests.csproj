@@ -10,7 +10,8 @@
     <PackageReference Include="nunit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
-    <PackageReference Include="CSharpGalenWrapper" Version="1.0.1"/>
+    <!-- <PackageReference Include="CSharpGalenWrapper" Version="1.0.1" /> -->
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="83.0.4103.3900" />
   </ItemGroup>
   <ItemGroup>
     <ContentWithTargetPath Include="specs/*">
@@ -19,8 +20,8 @@
     </ContentWithTargetPath>
 </ItemGroup>
 
-  <!-- <ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\src\CSharpGalenWrapper.csproj" />
-  </ItemGroup> -->
+  </ItemGroup>
 
 </Project>

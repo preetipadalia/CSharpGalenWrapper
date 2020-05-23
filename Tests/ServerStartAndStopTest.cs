@@ -30,7 +30,7 @@ namespace Tests
         [Test]
         public void TestCheckLayout()
         {
-             driver = new ChromeDriver("chromedriver");
+             driver = new ChromeDriver();
             driver.Navigate().GoToUrl("http://google.com");
 
             CSharpGalenWrapper.LayoutHelper helper = new CSharpGalenWrapper.LayoutHelper();

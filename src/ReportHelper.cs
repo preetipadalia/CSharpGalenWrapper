@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using CSharpGalenWrapper.Report;
 
 
-internal class ReportHelper
+public class ReportHelper
 {
-    internal void GenerateReport(string reportTitle,List<LayoutReport> testReport)
+    public static  void GenerateReport(string reportPath,List<LayoutReport> testReport)
     {
-        ReportGenerator.Generate(reportTitle,testReport);
+        ReportGenerator.Generate(reportPath,testReport);
     }
 
 

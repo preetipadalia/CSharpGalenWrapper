@@ -18,7 +18,7 @@ namespace Tests
         {
              helper = new CSharpGalenWrapper.LayoutHelper();
             helper.StartGalenServer();
-            driver = new ChromeDriver("chromedriver");
+            driver = new ChromeDriver();
             driver.Navigate().GoToUrl("http://google.com");
             driver.Manage().Window.Size = new System.Drawing.Size(200, 300);
 
