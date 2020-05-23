@@ -32,15 +32,18 @@ helper.StopGalenServer();
 ```
             
 ## To generate report
-	
+
 ```
-CSharpGalenWrapper.LayoutHelperhelper = new CSharpGalenWrapper.LayoutHelper();
-helper.StartGalenServer();
-IWebDriver driver = new ChromeDriver("chromedriver");
-driver.Navigate().GoToUrl("http://google.com");
-List<string> includedTags = new List<string>();
-includedTags.Add("mobile");
-LayoutReport rep = helper.CheckLayoutAndCreateReport(driver, "specs/GoogleTestWithSectionFilter.spec", includedTags, "test", "Testing", "results/test");
-helper.StopGalenServer();
+List<LayoutReport> reports=new List<LayoutReport>();
+LayoutReport rep = helper.CheckLayout(driver, "spec file path", new List<string>());
+//add report layout at run time in list
+reports.Add(rep);
+ReportHelper.GenerateReport("Report Target path",reports);
 ```
+or
+```
+LayoutReport rep = helper.CheckLayoutAndCreateReport(driver, "spec file path", includedTags, "test", "Testing", "Report Target Path");
+```
+
+ 
           
