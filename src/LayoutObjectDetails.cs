@@ -1,22 +1,22 @@
-namespace CSharpGalenWrapper.Report
+namespace CSharpGalenWrapper
 {
     public class LayoutObjectDetails
     {
-        private int[] area;
+        private int[] _area;
 
         public LayoutObjectDetails(int[] area)
         {
-            this.area = area;
+            _area = area;
         }
 
-        public int[] getArea()
+        public int[] GetArea()
         {
-            return this.area;
+            return _area;
         }
 
-        public void setArea(int[] area)
+        public void SetArea(int[] area)
         {
-            this.area = area;
+            _area = area;
         }
     }
 }

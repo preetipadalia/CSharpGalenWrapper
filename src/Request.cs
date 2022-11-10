@@ -1,53 +1,46 @@
-using System;
 using System.Collections.Generic;
 
-namespace CSharpGalenWrapper.Layout
+namespace CSharpGalenWrapper
 {
     public class Request
     {
-        private String sessionId;
-        private String url;
-        private String specPath;
-        private List<String> includedTags;
-        private string reportPath;
-        private String testTitle;
-        private Dictionary<String, String> properties;
-        private String browserType;
-        private String driverPath;
-        private String reportTitle;
-        private SectionFilter sectionFilter;
-        private int browserHeight;
-        private int browserWidth;
-        private bool reportEnabled;
+        public string SessionId { get; set; }
 
-        public string SessionId { get => sessionId; set => sessionId = value; }
-        public string Url { get => url; set => url = value; }
-        public string SpecPath { get => specPath; set => specPath = value; }
-        public List<string> IncludedTags { get => includedTags; set => includedTags = value; }
-        public string ReportPath { get => reportPath; set => reportPath = value; }
-        public SectionFilter SectionFilter { get => sectionFilter; set => sectionFilter = value; }
-        public string ReportTitle { get => reportTitle; set => reportTitle = value; }
-        public string TestTitle { get => testTitle; set => testTitle = value; }
-        public Dictionary<string, string> Properties { get => properties; set => properties = value; }
-        public string BrowserType { get => browserType; set => browserType = value; }
-        public string DriverPath { get => driverPath; set => driverPath = value; }
-        public int BrowserHeight { get => browserHeight; set => browserHeight = value; }
-        public int BrowserWidth { get => browserWidth; set => browserWidth = value; }
-        public bool ReportEnabled { get => reportEnabled; set => reportEnabled = value; }
+        public string Url { get; set; }
+
+        public string SpecPath { get; set; }
+
+        public List<string> IncludedTags { get; set; }
+
+        public string ReportPath { get; set; }
+
+        public SectionFilter SectionFilter { get; set; }
+
+        public string ReportTitle { get; set; }
+
+        public string TestTitle { get; set; }
+
+        public Dictionary<string, string> Properties { get; set; }
+
+        public string BrowserType { get; set; }
+
+        public string DriverPath { get; set; }
+
+        public int BrowserHeight { get; set; }
+
+        public int BrowserWidth { get; set; }
+
+        public bool ReportEnabled { get; set; }
     }
 
     public class SectionFilter
     {
+        public List<string> IncludedTags { get; set; }
 
-        private List<String> includedTags;
-        private List<String> excludedTags;
-        private String sectionName;
-    
+        public List<string> ExcludedTags { get; set; }
 
-        public List<string> IncludedTags { get => includedTags; set => includedTags = value; }
-        public List<string> ExcludedTags { get => excludedTags; set => excludedTags = value; }
-        public string SectionName { get => sectionName; set => sectionName = value; }
-        
+        public string SectionName { get; set; }
+
         public SectionFilter()
         {
         }

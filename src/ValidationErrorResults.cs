@@ -1,15 +1,11 @@
-   using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
+using Newtonsoft.Json;
 
-namespace  CSharpGalenWrapper.Report.Validation
+namespace CSharpGalenWrapper
 {
 public partial class ValidationResult
     {
         [JsonProperty("spec")]
-        public Spec Spec { get; set; }
+        public Layout.Spec Spec { get; set; }
 
         [JsonProperty("validationObjects")]
         public ValidationObject[] ValidationObjects { get; set; }
@@ -21,7 +17,7 @@ public partial class ValidationResult
         public object ChildValidationResults { get; set; }
 
         [JsonProperty("meta")]
-        public Meta[] Meta { get; set; }
+        public Layout.Meta[] Meta { get; set; }
     }
 
     public partial class Error
@@ -69,7 +65,7 @@ public partial class ValidationResult
         public JsVariables Properties { get; set; }
 
         [JsonProperty("place")]
-        public Place Place { get; set; }
+        public Layout.Place Place { get; set; }
 
         [JsonProperty("onlyWarn")]
         public bool OnlyWarn { get; set; }
