@@ -1,25 +1,22 @@
-using System;
 using System.Collections.Generic;
-using CSharpGalenWrapper.Report;
 
-public class ReportRequest
+namespace CSharpGalenWrapper
 {
-    private List<LayoutMap> layoutReport;
-    private String reportPath;
-    private String testTitle;
-    private String layoutTitle;
+    public class ReportRequest
+    {
+        public List<LayoutMap> LayoutReport { get; set; }
 
-    public List<LayoutMap> LayoutReport { get => layoutReport; set => layoutReport = value; }
-    public string ReportPath { get => reportPath; set => reportPath = value; }
-    public string TestTitle { get => testTitle; set => testTitle = value; }
-    public string LayoutTitle { get => layoutTitle; set => layoutTitle = value; }
-}
+        public string ReportPath { get; set; }
 
-public class LayoutMap
-{
-    string title;
-    string id;
+        public string TestTitle { get; set; }
 
-    public string Title { get => title; set => title = value; }
-    public string Id { get => id; set => id = value; }
+        public string LayoutTitle { get; set; }
+    }
+
+    public class LayoutMap
+    {
+        public string Title { get; set; }
+
+        public string Id { get; set; }
+    }
 }

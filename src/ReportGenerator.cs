@@ -1,52 +1,56 @@
 using System.Collections.Generic;
 using System.IO;
-using CSharpGalenWrapper.API;
-using CSharpGalenWrapper.Report;
+using CSharpGalenWrapper.Layout;
 using Newtonsoft.Json;
 using RestSharp;
-internal class ReportGenerator
+
+namespace CSharpGalenWrapper
 {
-    internal static string Generate(string reportPath, List<LayoutReport> testReport)
+    internal class ReportGenerator
     {
-        ReportRequest request = new ReportRequest();
-        List<LayoutMap> maps = new List<LayoutMap>();
-        foreach (LayoutReport rep in testReport)
+        internal static string Generate(string reportPath, List<LayoutReport> testReport)
         {
-            LayoutMap map = new LayoutMap();
-            map.Id = rep.Id;
-            map.Title = rep.Title;
-            if(map.Title==null)
-            map.Title="";
-            maps.Add(map);
+            var request = new ReportRequest();
+            var maps = new List<LayoutMap>();
+            foreach (var rep in testReport)
+            {
+                var map = new LayoutMap
+                {
+                    Id = rep.Id,
+                    Title = rep.Title
+                };
+                if(map.Title==null)
+                    map.Title="";
+                maps.Add(map);
+            }
+            request.ReportPath =Path.GetFullPath( Path.Combine(Directory.GetCurrentDirectory(), reportPath)); request.LayoutReport = maps;
+            return ExecuteRequest(request);
         }
-        request.ReportPath =Path.GetFullPath( Path.Combine(Directory.GetCurrentDirectory(), reportPath)); request.LayoutReport = maps;
-        return ExecuteRequest(request);
-    }
 
-    private static string ExecuteRequest(ReportRequest request)
-    {
-        string req = GetRequestString(request);
-        IRestResponse response = ExecuteRequestGenerateReport(req);
-        if (response.ErrorException != null && response.ErrorException.Message.Trim() != "")
-            return response.ErrorException.Message;
-        else
-        if (response.ErrorMessage != null && response.ErrorMessage.Trim() != "")
-            return response.ErrorMessage;
-        return response.Content;
-    }
+        private static string ExecuteRequest(ReportRequest request)
+        {
+            var req = GetRequestString(request);
+            var response = ExecuteRequestGenerateReport(req);
+            if (response.ErrorException != null && response.ErrorException.Message.Trim() != "")
+                return response.ErrorException.Message;
+            else
+            if (response.ErrorMessage != null && response.ErrorMessage.Trim() != "")
+                return response.ErrorMessage;
+            return response.Content;
+        }
 
-    private static IRestResponse ExecuteRequestGenerateReport(string req)
-    {
-        var client = new RestClient("http://localhost:" + ServerHelper.port + "/generateReport");
-        var request = new RestRequest(Method.POST);
-        request.Parameters.Clear();
-        request.AddParameter("application/json", req, ParameterType.RequestBody);
-        IRestResponse response = client.Execute(request);
-        return response;
-    }
+        private static RestResponse ExecuteRequestGenerateReport(string req)
+        {
+            var client = new RestClient("http://localhost:" + ServerHelper.Port + "/generateReport");
+            var request = new RestRequest();
+            request.AddParameter("application/json", req, ParameterType.RequestBody);
+            var response = client.Post(request);
+            return response;
+        }
 
-    private static string GetRequestString(ReportRequest request1)
-    {
-        return JsonConvert.SerializeObject(request1);
+        private static string GetRequestString(ReportRequest request1)
+        {
+            return JsonConvert.SerializeObject(request1);
+        }
     }
 }

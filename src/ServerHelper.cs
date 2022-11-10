@@ -1,50 +1,40 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
-using CSharpGalenWrapper.Driver;
-using CSharpGalenWrapper.Layout;
-using Newtonsoft.Json;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
 using RestSharp;
 
-namespace CSharpGalenWrapper.API
+namespace CSharpGalenWrapper
 {
     internal class ServerHelper
     {
-        static Process process;
-        internal static int port;
+        static Process _process;
+        internal static int Port;
         internal static int StartGalenServer(string serverPath = "")
         {
             ValidateIfGalenServerFileExists(serverPath); 
             if (serverPath.Trim() == "")
                 serverPath = Environment.CurrentDirectory;
-            port = GetAvailablePort(9000);
-            process = new Process();
-            process.StartInfo.FileName = "Java";
-            process.StartInfo.WorkingDirectory = serverPath;
-            process.StartInfo.Arguments = "-jar -Dserver.port=" + port + " GalenWrapperAPI-0.0.1.jar";
-            DateTime previousTime = DateTime.Now;
-            bool isStarted = process.Start();
+            Port = GetAvailablePort(9000);
+            _process = new Process();
+            _process.StartInfo.FileName = "Java";
+            _process.StartInfo.WorkingDirectory = serverPath;
+            _process.StartInfo.Arguments = "-jar -Dserver.port=" + Port + " GalenWrapperAPI-0.0.1.jar";
+            var isStarted = _process.Start();
             if (isStarted)
             {
 
-                bool serverUp = false;
-                int timeouts = 120;
-                DateTime newTime = DateTime.Now;
+                var serverUp = false;
 
                 while (!serverUp)
                 {
                     ValidateIfServerProcessIsRunning(); 
                     serverUp = IsServerUp(serverUp);
-                    newTime = DateTime.Now;
                 }
                 if (!IsServerUp(serverUp))
                     throw new Exception("Unable to start the server.");
-                return process.Id;
+                return _process.Id;
             }
             else
                 throw new Exception("Unable to start the server");
@@ -53,7 +43,7 @@ namespace CSharpGalenWrapper.API
 
         private static void ValidateIfServerProcessIsRunning()
         {
-            if (process.HasExited)
+            if (_process.HasExited)
                 throw new Exception("Galen server is not running or unable to start.");
         }
 
@@ -94,11 +84,10 @@ namespace CSharpGalenWrapper.API
         private static bool IsServerUp(bool serverUp)
         {
             serverUp = false;
-            var client = new RestClient("http://localhost:" + port + "/checkHealth");
-            var request = new RestRequest(Method.GET);
-            request.Parameters.Clear();
+            var client = new RestClient("http://localhost:" + Port + "/checkHealth");
+            var request = new RestRequest();
             //request.AddParameter("application/json", req, ParameterType.RequestBody);
-            IRestResponse response = client.Execute(request);
+            var response = client.Get(request);
             if (response.Content.Equals("I am up"))
                 serverUp = true;
             return serverUp;
@@ -106,11 +95,8 @@ namespace CSharpGalenWrapper.API
 
         internal static void StopGalenServer()
         {
-
-            process.Kill();
-
+            _process.Kill();
             //return response;
-
         }
     }
 }

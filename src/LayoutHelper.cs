@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using OpenQA.Selenium;
-using CSharpGalenWrapper.API;
-using Newtonsoft.Json;
 using CSharpGalenWrapper.Layout;
-using CSharpGalenWrapper.Report;
+using OpenQA.Selenium;
+using Newtonsoft.Json;
 
 namespace CSharpGalenWrapper
 {
     public class LayoutHelper
     {
-        CheckLayoutAPI layoutAPI;
+        private readonly CheckLayoutApi _layoutApi;
         public LayoutHelper()
         {
-            layoutAPI = new CheckLayoutAPI();
+            _layoutApi = new CheckLayoutApi();
         }
         /// <summary>
         /// Check layout With Existing Driver
@@ -24,8 +22,8 @@ namespace CSharpGalenWrapper
         /// <returns></returns>
         public LayoutReport CheckLayout(IWebDriver driver, string specFilePath, List<string> listIncluded)
         {
-            var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, listIncluded, "", "", "");
-            LayoutReport rep = GetLayoutReportObject(layoutRep);
+            var layoutRep = _layoutApi.CheckLayoutPost(driver, specFilePath, listIncluded, "", "", "");
+            var rep = GetLayoutReportObject(layoutRep);
             return rep;
         }
 
@@ -38,8 +36,8 @@ namespace CSharpGalenWrapper
         /// <returns></returns>
         public LayoutReport CheckLayout(IWebDriver driver, string specFilePath, SectionFilter filter)
         {
-            var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, filter, "", "", "");
-            LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
+            var layoutRep = _layoutApi.CheckLayoutPost(driver, specFilePath, filter, "", "", "");
+            var rep = GetLayoutReportObject(layoutRep.ToString());
             return rep;
         }
         /// <summary>
@@ -52,8 +50,8 @@ namespace CSharpGalenWrapper
         /// <returns></returns>
         public LayoutReport CheckLayout(IWebDriver driver, string specFilePath, SectionFilter filter, Dictionary<string, string> properties)
         {
-            var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, filter, properties, "", "", "");
-            LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
+            var layoutRep = _layoutApi.CheckLayoutPost(driver, specFilePath, filter, properties, "", "", "");
+            var rep = GetLayoutReportObject(layoutRep.ToString());
             return rep;
         }
 
@@ -69,8 +67,8 @@ namespace CSharpGalenWrapper
         /// <returns></returns>
         public LayoutReport CheckLayoutAndCreateReport(IWebDriver driver, string specFilePath, List<string> listIncluded, string testTitle, string reportTitle, string reportPath)
         {
-            var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, listIncluded, testTitle, reportTitle, reportPath,true);
-            LayoutReport rep = GetLayoutReportObject(layoutRep);
+            var layoutRep = _layoutApi.CheckLayoutPost(driver, specFilePath, listIncluded, testTitle, reportTitle, reportPath, true);
+            var rep = GetLayoutReportObject(layoutRep);
             return rep;
         }
         /// <summary>
@@ -85,8 +83,8 @@ namespace CSharpGalenWrapper
         /// <returns></returns>
         public LayoutReport CheckLayoutAndCreateReport(IWebDriver driver, string specFilePath, SectionFilter filter, string testTitle, string reportTitle, string reportPath)
         {
-            var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, filter, testTitle, reportTitle, reportPath,true);
-            LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
+            var layoutRep = _layoutApi.CheckLayoutPost(driver, specFilePath, filter, testTitle, reportTitle, reportPath, true);
+            var rep = GetLayoutReportObject(layoutRep.ToString());
             return rep;
         }
         /// <summary>
@@ -102,8 +100,8 @@ namespace CSharpGalenWrapper
         /// <returns></returns>
         public LayoutReport CheckLayoutAndCreateReport(IWebDriver driver, string specFilePath, SectionFilter filter, Dictionary<string, string> properties, string testTitle, string reportTitle, string reportPath)
         {
-            var layoutRep = layoutAPI.CheckLayoutPost(driver, specFilePath, filter, properties, testTitle, reportTitle, reportPath,true);
-            LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
+            var layoutRep = _layoutApi.CheckLayoutPost(driver, specFilePath, filter, properties, testTitle, reportTitle, reportPath, true);
+            var rep = GetLayoutReportObject(layoutRep.ToString());
             return rep;
         }
 
@@ -116,8 +114,8 @@ namespace CSharpGalenWrapper
         /// <returns></returns>
         public LayoutReport CheckLayout(Browser browser, string specFilePath, List<string> listIncluded)
         {
-            var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, listIncluded, "", "", "");
-            LayoutReport rep = GetLayoutReportObject(layoutRep);
+            var layoutRep = _layoutApi.CheckLayoutPost(browser, specFilePath, listIncluded, "", "", "");
+            var rep = GetLayoutReportObject(layoutRep);
             return rep;
         }
         /// <summary>
@@ -129,8 +127,8 @@ namespace CSharpGalenWrapper
         /// <returns></returns>
         public LayoutReport CheckLayout(Browser browser, string specFilePath, SectionFilter filter)
         {
-            var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, filter, "", "", "");
-            LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
+            var layoutRep = _layoutApi.CheckLayoutPost(browser, specFilePath, filter, "", "", "");
+            var rep = GetLayoutReportObject(layoutRep.ToString());
             return rep;
         }
 
@@ -144,8 +142,8 @@ namespace CSharpGalenWrapper
         /// <returns></returns>
         public LayoutReport CheckLayout(Browser browser, string specFilePath, SectionFilter filter, Dictionary<string, string> properties)
         {
-            var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, filter, properties, "", "", "");
-            LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
+            var layoutRep = _layoutApi.CheckLayoutPost(browser, specFilePath, filter, properties, "", "", "");
+            var rep = GetLayoutReportObject(layoutRep.ToString());
             return rep;
         }
 
@@ -161,8 +159,8 @@ namespace CSharpGalenWrapper
         /// <returns></returns>
         public LayoutReport CheckLayoutAndCreateReport(Browser browser, string specFilePath, List<string> listIncluded, string testTitle, string reportTitle, string reportPath)
         {
-            var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, listIncluded, testTitle, reportTitle, reportPath,true);
-            LayoutReport rep = GetLayoutReportObject(layoutRep);
+            var layoutRep = _layoutApi.CheckLayoutPost(browser, specFilePath, listIncluded, testTitle, reportTitle, reportPath, true);
+            var rep = GetLayoutReportObject(layoutRep);
             return rep;
         }
 
@@ -178,8 +176,8 @@ namespace CSharpGalenWrapper
         /// <returns></returns>
         public LayoutReport CheckLayoutAndCreateReport(Browser browser, string specFilePath, SectionFilter filter, string testTitle, string reportTitle, string reportPath)
         {
-            var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, filter, testTitle, reportTitle, reportPath,true);
-            LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
+            var layoutRep = _layoutApi.CheckLayoutPost(browser, specFilePath, filter, testTitle, reportTitle, reportPath, true);
+            var rep = GetLayoutReportObject(layoutRep.ToString());
             return rep;
         }
 
@@ -196,8 +194,8 @@ namespace CSharpGalenWrapper
         /// <returns></returns>
         public LayoutReport CheckLayoutAndCreateReport(Browser browser, string specFilePath, SectionFilter filter, Dictionary<string, string> properties, string testTitle, string reportTitle, string reportPath)
         {
-            var layoutRep = layoutAPI.CheckLayoutPost(browser, specFilePath, filter, properties, testTitle, reportTitle, reportPath,true);
-            LayoutReport rep = GetLayoutReportObject(layoutRep.ToString());
+            var layoutRep = _layoutApi.CheckLayoutPost(browser, specFilePath, filter, properties, testTitle, reportTitle, reportPath, true);
+            var rep = GetLayoutReportObject(layoutRep.ToString());
             return rep;
         }
 
@@ -206,13 +204,13 @@ namespace CSharpGalenWrapper
         {
             try
             {
-                Result result = JsonConvert.DeserializeObject<Result>(layoutRep);
+                var result = JsonConvert.DeserializeObject<Result>(layoutRep);
                 if (result.ExceptionMessage != "no Exception")
                 {
                     throw new Exception(result.ExceptionMessage);
                 }
-                LayoutReport report = result.Report;
-                report.Id=result.Id;
+                var report = result.Report;
+                report.Id = result.Id;
                 report.Errors = result.Errors;
                 report.ExceptionMessage = result.ExceptionMessage;
                 report.Warnings = result.Warnings;
