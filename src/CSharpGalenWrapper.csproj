@@ -19,7 +19,7 @@
   <ItemGroup>
     <PackageReference Include="JSON.net" Version="1.0.22" />
     <PackageReference Include="restsharp" Version="106.11.3" />
-    <PackageReference Include="selenium.webdriver" Version="3.141.0" />
+    <PackageReference Include="selenium.webdriver" Version="4.6.0" />
   </ItemGroup>
   <ItemGroup>
 <None Include="GalenWrapperAPI-0.0.1.jar">

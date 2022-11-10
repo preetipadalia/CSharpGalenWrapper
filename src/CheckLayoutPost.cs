@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using CSharpGalenWrapper.Driver;
 using CSharpGalenWrapper.Layout;
 using Newtonsoft.Json;
 using OpenQA.Selenium;
@@ -12,13 +11,19 @@ namespace CSharpGalenWrapper.API
 {
     internal class CheckLayoutAPI
     {
-        internal string CheckLayoutPost(IWebDriver driver1, string specPath, List<string> includedTags, string testTitle, string reportTitle, string reportPath,bool isReportEnabled=false)
+        internal string CheckLayoutPost(IWebDriver driver, string specPath, List<string> includedTags, string testTitle, string reportTitle, string reportPath,bool isReportEnabled=false)
         {
-            RemoteWebDriver driver = (RemoteWebDriver)driver1;
             Request request1 = new Request();
-
-            request1.Url = RemoteWebDriverHelper.GetExecutorURLFromDriver(driver).AbsoluteUri;
-            request1.SessionId = driver.SessionId.ToString();
+            if (driver is WebDriver webDriver)
+            {
+                request1.Url = WebDriverHelper.GetExecutorURLFromDriver(webDriver).AbsoluteUri;
+                request1.SessionId = webDriver.SessionId.ToString();
+            }
+            else
+            {
+                throw new ArgumentException($"{driver.GetType().Name} is not compatible for using as {nameof(WebDriver)}");
+            }
+            
             request1=GetSpecFilePath(specPath, request1);
             request1.IncludedTags = includedTags;
             request1.ReportEnabled=isReportEnabled;
@@ -47,10 +52,16 @@ namespace CSharpGalenWrapper.API
 
         internal String CheckLayoutPost(IWebDriver driver, string specFilePath, SectionFilter sectionFilter, string testTitle, string reportTitle, string reportPath,bool isReportEnabled=false)
         {
-            RemoteWebDriver driver1 = (RemoteWebDriver)driver;
             Request request1 = new Request();
-            request1.Url = RemoteWebDriverHelper.GetExecutorURLFromDriver(driver1).AbsoluteUri;
-            request1.SessionId = driver1.SessionId.ToString();
+            if (driver is WebDriver webDriver)
+            {
+                request1.Url = WebDriverHelper.GetExecutorURLFromDriver(webDriver).AbsoluteUri;
+                request1.SessionId = webDriver.SessionId.ToString();
+            }
+            else
+            {
+                throw new ArgumentException($"{driver.GetType().Name} is not compatible for using as {nameof(WebDriver)}");
+            }
            request1=GetSpecFilePath(specFilePath, request1);
             request1.SectionFilter = sectionFilter;
              request1.ReportEnabled=isReportEnabled;
@@ -88,11 +99,17 @@ namespace CSharpGalenWrapper.API
 
         internal String CheckLayoutPost(IWebDriver driver, string specFilePath, SectionFilter sectionFilter, Dictionary<string, string> properties, string testTitle, string reportTitle, string reportPath,bool isReportEnabled=false)
         {
-            RemoteWebDriver driver1 = (RemoteWebDriver)driver;
             Request request1 = new Request();
-            request1.Url = RemoteWebDriverHelper.GetExecutorURLFromDriver(driver1).AbsoluteUri;
-            request1.SessionId = driver1.SessionId.ToString();
-            request1=GetSpecFilePath(specFilePath, request1);
+            if (driver is WebDriver webDriver)
+            {
+                request1.Url = WebDriverHelper.GetExecutorURLFromDriver(webDriver).AbsoluteUri;
+                request1.SessionId = webDriver.SessionId.ToString();
+            }
+            else
+            {
+                throw new ArgumentException($"{driver.GetType().Name} is not compatible for using as {nameof(WebDriver)}");
+            }
+            request1 =GetSpecFilePath(specFilePath, request1);
             request1.SectionFilter = sectionFilter;
             request1.Properties = properties;
              request1.ReportEnabled=isReportEnabled;
