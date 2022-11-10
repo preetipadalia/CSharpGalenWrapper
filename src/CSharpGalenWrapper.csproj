@@ -17,8 +17,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JSON.net" Version="1.0.22" />
-    <PackageReference Include="restsharp" Version="106.11.3" />
+    <PackageReference Include="JSON.net" Version="1.0.33" />
+    <PackageReference Include="restsharp" Version="108.0.2" />
     <PackageReference Include="selenium.webdriver" Version="4.6.0" />
   </ItemGroup>
   <ItemGroup>

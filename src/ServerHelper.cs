@@ -21,20 +21,16 @@ namespace CSharpGalenWrapper
             _process.StartInfo.FileName = "Java";
             _process.StartInfo.WorkingDirectory = serverPath;
             _process.StartInfo.Arguments = "-jar -Dserver.port=" + Port + " GalenWrapperAPI-0.0.1.jar";
-            var previousTime = DateTime.Now;
             var isStarted = _process.Start();
             if (isStarted)
             {
 
                 var serverUp = false;
-                var timeouts = 120;
-                var newTime = DateTime.Now;
 
                 while (!serverUp)
                 {
                     ValidateIfServerProcessIsRunning(); 
                     serverUp = IsServerUp(serverUp);
-                    newTime = DateTime.Now;
                 }
                 if (!IsServerUp(serverUp))
                     throw new Exception("Unable to start the server.");
@@ -89,10 +85,9 @@ namespace CSharpGalenWrapper
         {
             serverUp = false;
             var client = new RestClient("http://localhost:" + Port + "/checkHealth");
-            var request = new RestRequest(Method.GET);
-            request.Parameters.Clear();
+            var request = new RestRequest();
             //request.AddParameter("application/json", req, ParameterType.RequestBody);
-            var response = client.Execute(request);
+            var response = client.Get(request);
             if (response.Content.Equals("I am up"))
                 serverUp = true;
             return serverUp;
@@ -100,11 +95,8 @@ namespace CSharpGalenWrapper
 
         internal static void StopGalenServer()
         {
-
             _process.Kill();
-
             //return response;
-
         }
     }
 }

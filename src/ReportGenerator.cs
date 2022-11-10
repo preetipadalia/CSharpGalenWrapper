@@ -14,9 +14,11 @@ namespace CSharpGalenWrapper
             var maps = new List<LayoutMap>();
             foreach (var rep in testReport)
             {
-                var map = new LayoutMap();
-                map.Id = rep.Id;
-                map.Title = rep.Title;
+                var map = new LayoutMap
+                {
+                    Id = rep.Id,
+                    Title = rep.Title
+                };
                 if(map.Title==null)
                     map.Title="";
                 maps.Add(map);
@@ -37,13 +39,12 @@ namespace CSharpGalenWrapper
             return response.Content;
         }
 
-        private static IRestResponse ExecuteRequestGenerateReport(string req)
+        private static RestResponse ExecuteRequestGenerateReport(string req)
         {
             var client = new RestClient("http://localhost:" + ServerHelper.Port + "/generateReport");
-            var request = new RestRequest(Method.POST);
-            request.Parameters.Clear();
+            var request = new RestRequest();
             request.AddParameter("application/json", req, ParameterType.RequestBody);
-            var response = client.Execute(request);
+            var response = client.Post(request);
             return response;
         }
 

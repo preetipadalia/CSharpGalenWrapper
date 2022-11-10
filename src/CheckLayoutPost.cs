@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
 using Newtonsoft.Json;
 using OpenQA.Selenium;
 using RestSharp;
@@ -115,13 +116,12 @@ namespace CSharpGalenWrapper
             return ExecuteRequest(request1);
         }
 
-        private static IRestResponse ExecuteRequestCheckLayout(string req)
+        private static RestResponse ExecuteRequestCheckLayout(string req)
         {
             var client = new RestClient("http://localhost:" + ServerHelper.Port + "/checkLayout");
-            var request = new RestRequest(Method.POST);
-            request.Parameters.Clear();
+            var request = new RestRequest();
             request.AddParameter("application/json", req, ParameterType.RequestBody);
-            var response = client.Execute(request);
+            var response = client.Post(request);
             return response;
         }
 
