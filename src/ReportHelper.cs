@@ -1,14 +1,16 @@
 using System.Collections.Generic;
-using CSharpGalenWrapper.Report;
+using CSharpGalenWrapper.Layout;
 
-
-public class ReportHelper
+namespace CSharpGalenWrapper
 {
-    public static  void GenerateReport(string reportPath,List<LayoutReport> testReport)
+    public class ReportHelper
     {
-        ReportGenerator.Generate(reportPath,testReport);
-    }
+        public static  void GenerateReport(string reportPath,List<LayoutReport> testReport)
+        {
+            ReportGenerator.Generate(reportPath,testReport);
+        }
 
 
    
+    }
 }

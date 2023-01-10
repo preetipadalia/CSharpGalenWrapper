@@ -4,7 +4,7 @@
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
  <PackageId>CsharpGalenWrapper</PackageId>
-  <Version>1.0.3</Version>
+  <Version>1.1.0</Version>
   <Authors>Preeti</Authors>
   <PackageTags>Layout Testing, c#</PackageTags>
    <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -17,9 +17,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JSON.net" Version="1.0.22" />
-    <PackageReference Include="restsharp" Version="106.11.3" />
-    <PackageReference Include="selenium.webdriver" Version="3.141.0" />
+    <PackageReference Include="JSON.net" Version="1.0.33" />
+    <PackageReference Include="restsharp" Version="108.0.2" />
+    <PackageReference Include="selenium.webdriver" Version="4.6.0" />
   </ItemGroup>
   <ItemGroup>
 <None Include="GalenWrapperAPI-0.0.1.jar">
