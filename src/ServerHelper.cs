@@ -95,7 +95,7 @@ namespace CSharpGalenWrapper
 
         internal static void StopGalenServer()
         {
-            _process.Kill();
+            _process.Dispose();
             //return response;
         }
     }
