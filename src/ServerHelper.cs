@@ -76,6 +76,7 @@ namespace CSharpGalenWrapper
                 .Where(i => !tcpConnectionPorts.Contains(i))
                 .Where(i => !tcpListenerPorts.Contains(i))
                 .Where(i => !udpListenerPorts.Contains(i))
+                .Skip((new Random()).Next(100,1000)) // an attempt to solve `The Port is in use` issue
                 .FirstOrDefault();
 
             return port;
